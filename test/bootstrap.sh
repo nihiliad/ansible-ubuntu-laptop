@@ -5,19 +5,14 @@ apt update
 # For Ansible:
 apt install -y python
 
-# Because the Ubuntu base box lacks Unity, and without this Ubuntu will
-# not build all the VirtualBox guest additions:
-apt install -y unity
+# Prevent `vagrant ssh` from asking for a password (TODO: Put this in the vagrant box!)
+curl https://raw.githubusercontent.com/mitchellh/vagrant/master/keys/vagrant.pub > /home/vagrant/.ssh/authorized_keys
 
+# These should already be installed in the guest box--now unnecessary.
 # For the VirtualBox guest additions:
 # TODO: Make the VirtualBox version configurable!
-apt install -y build-essential module-assistant dkms
-m-a prepare
-wget http://download.virtualbox.org/virtualbox/5.0.14/VBoxGuestAdditions_5.0.14.iso -P /tmp
-sudo mount -o loop /tmp/VBoxGuestAdditions_5.0.14.iso /mnt
-sh /mnt/VBoxLinuxAdditions.run
-
-#if ! [ -L /var/www ]; then
-#  rm -rf /var/www
-#  ln -fs /vagrant /var/www
-#fi
+#apt install -y build-essential module-assistant dkms
+#m-a prepare
+#wget http://download.virtualbox.org/virtualbox/5.0.14/VBoxGuestAdditions_5.0.14.iso -P /tmp
+#sudo mount -o loop /tmp/VBoxGuestAdditions_5.0.14.iso /mnt
+#sh /mnt/VBoxLinuxAdditions.run

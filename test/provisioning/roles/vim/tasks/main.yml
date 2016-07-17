@@ -1,3 +1,45 @@
 ---
 - name: install
   apt: name=vim state=present
+  tags:
+    - vim
+
+- name: vimrc
+  copy: >
+    src=vimrc
+    dest=/home/{{ ansible_user }}/.vimrc
+    owner={{ ansible_user }}
+    group={{ ansible_user }}
+    mode=0664
+  tags:
+    - vim
+
+- name: .vim directory
+  file: path=/home/{{ ansible_user }}/.vim state=directory
+    owner={{ ansible_user }}
+    group={{ ansible_user }}
+    mode=0775
+  tags:
+    - vim
+
+- name: NeoBundle directory
+  file: path=/home/{{ ansible_user }}/.vim/bundle state=directory
+    owner={{ ansible_user }}
+    group={{ ansible_user }}
+    mode=0775
+  tags:
+    - vim
+    - neobundle
+
+- name: NeoBundle install
+  git: repo=https://github.com/Shougo/neobundle.vim dest=/home/{{ ansible_user }}/.vim/bundle/neobundle.vim
+  tags:
+    - vim
+    - neobundle
+
+# Needs work:
+#- name: NeoBundle install plugins
+#  command: vim +NeoBundleInstall +qall
+#  tags:
+#    - vim
+#    - neobundle

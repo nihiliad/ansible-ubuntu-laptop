@@ -1,0 +1,5 @@
+---
+- name: install
+  apt: name=git state=present
+  tags:
+    - git

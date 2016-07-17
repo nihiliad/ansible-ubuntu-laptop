@@ -1,0 +1,5 @@
+---
+- name: install
+  apt: name=powerline state=present
+  tags:
+    - powerline

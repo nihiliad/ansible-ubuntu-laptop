@@ -2,9 +2,11 @@
 - hosts: all
   become: true
   vars:
-    ansible_user: ubuntu
+    ansible_user: vagrant
   roles:
+    - git
     - dropbox
+    - powerline
     - vim
 
   tasks:
