@@ -31,15 +31,24 @@
     - vim
     - neobundle
 
-- name: NeoBundle install
+- name: NeoBundle git clone
   git: repo=https://github.com/Shougo/neobundle.vim dest=/home/{{ ansible_user }}/.vim/bundle/neobundle.vim
+  become: yes
+  become_user: "{{ ansible_user }}"
   tags:
     - vim
     - neobundle
 
-# Needs work:
-#- name: NeoBundle install plugins
-#  command: vim +NeoBundleInstall +qall
+#- name: NeoBundle fix git permissions
+#  file: path=/home/{{ ansible_user }}/.vim/bundle/neobundle.vim owner={{ ansible_user }} group={{ ansible_user }} state=directory recurse=yes
 #  tags:
 #    - vim
 #    - neobundle
+
+- name: NeoBundle install
+  shell: /home/{{ ansible_user }}/.vim/bundle/neobundle.vim/bin/neoinstall
+  become: yes
+  become_user: "{{ ansible_user }}"
+  tags:
+    - vim
+    - neobundle
