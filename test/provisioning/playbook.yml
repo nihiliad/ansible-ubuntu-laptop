@@ -10,6 +10,6 @@
     - vim
 
   tasks:
-    #- name: install dropbox
-    #apt: name=nautilus-dropbox state=present
+    #    - name: install dropbox
+    #  apt: name=nautilus-dropbox state=present
 
