@@ -5,9 +5,12 @@ Vagrant.require_version ">= 1.7.0"
 
 Vagrant.configure(2) do |config|
 
-  #config.vm.box = "ubuntu-unity-xenial"
+  config.vm.box = "ubuntu-unity-xenial"
+
+  # This probably only exists on my T420s.
   #config.vm.box = "ubuntu-unity-xenial-16.04.1"
-  config.vm.box = "boxcutter/ubuntu1604-desktop"
+
+  #config.vm.box = "boxcutter/ubuntu1604-desktop"
 
   # TODO: Do I still need this for Ubuntu?
   # Disable the new default behavior introduced in Vagrant 1.7, to
@@ -17,7 +20,7 @@ Vagrant.configure(2) do |config|
 
   config.vm.provision "ansible" do |ansible|
     ansible.verbose = "v"
-    ansible.playbook = "provisioning/playbook.yml"
+    ansible.playbook = "playbook.yml"
   end
 
   config.vm.provider "virtualbox" do |v|
