@@ -5,10 +5,14 @@ Vagrant.require_version ">= 1.7.0"
 
 Vagrant.configure(2) do |config|
 
-  config.vm.box = "ubuntu-unity-xenial"
+  # This is broken.
+  # config.vm.box = "ubuntu-unity-xenial"
 
   # This probably only exists on my T420s.
   #config.vm.box = "ubuntu-unity-xenial-16.04.1"
+  #
+  # This is on my UMN Google Drive, in Vagrant/.
+  config.vm.box = "ubuntu-16.04.1-desktop-amd64"
 
   #config.vm.box = "boxcutter/ubuntu1604-desktop"
 
