@@ -1,0 +1,10 @@
+---
+- name: apt repository
+  apt_repository: repo='ppa:webupd8team/atom'
+  tags:
+    - atom
+
+- name: install
+  apt: name=atom state=present
+  tags:
+    - atom
