@@ -5,6 +5,6 @@
     - atom
 
 - name: install
-  apt: name=atom state=present
+  apt: name=atom state=present update_cache=yes
   tags:
     - atom

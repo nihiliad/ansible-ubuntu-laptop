@@ -1,0 +1,5 @@
+---
+- name: prevent automatic startup
+  lineinfile: dest=/etc/rc.local insertbefore="^exit 0" line="rfkill block bluetooth"
+  tags:
+    - bluetooth

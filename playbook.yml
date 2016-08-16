@@ -5,6 +5,7 @@
     ansible_user: vagrant
   roles:
     - atom
+    - bluetooth
     - git
     - dropbox
     - powerline
