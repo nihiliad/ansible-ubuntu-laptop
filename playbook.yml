@@ -4,6 +4,7 @@
   vars:
     ansible_user: vagrant
   roles:
+    - atom
     - git
     - dropbox
     - powerline
