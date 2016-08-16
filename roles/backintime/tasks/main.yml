@@ -1,0 +1,10 @@
+---
+- name: apt repository
+  apt_repository: repo='ppa:bit-team/stable'
+  tags:
+    - backintime
+
+- name: install
+  apt: name=backintime-gnome state=present update_cache=yes
+  tags:
+    - backintime
