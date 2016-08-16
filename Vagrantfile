@@ -18,6 +18,7 @@ Vagrant.configure(2) do |config|
   end
 
   config.vm.provider "virtualbox" do |v|
+    v.name = 'ansible-ubuntu-laptop'
     v.gui = true
   end
 end
