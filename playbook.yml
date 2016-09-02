@@ -11,6 +11,7 @@
     - dropbox
     - powerline
     - vim
+    - zsh
 
   tasks:
     #    - name: install dropbox

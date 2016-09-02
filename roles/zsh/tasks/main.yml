@@ -1,0 +1,60 @@
+---
+- name: install
+  apt: name=zsh state=present
+  tags:
+    - zsh
+
+- name: install Oh My ZSH!
+  shell: ZSH=/usr/local/bin/oh-my-zsh sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+  tags:
+    - zsh
+
+- name: install powerlevel9k theme
+  git: >
+    repo=https://github.com/bhilburn/powerlevel9k.git
+    dest=/usr/local/bin/oh-my-zsh/custom/themes/powerlevel9k
+
+- name: install syntax highlighting plugin
+  git: >
+    repo=git://github.com/zsh-users/zsh-syntax-highlighting.git
+    dest=/usr/local/bin/oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+
+- name: global zshrc
+  become: true
+  template: >
+    src=global.zshrc.j2
+    dest=/usr/local/etc/zsh.zshrc
+    owner=root
+    group=root
+    mode="644"
+  tags:
+    - zsh
+
+- name: user zshrc
+  copy: >
+    src=user.zshrc
+    dest=/home/{{ ansible_ssh_user }}/.zshrc
+    owner={{ ansible_ssh_user }}
+    group={{ ansible_ssh_user }}
+    mode="600"
+  tags:
+    - zsh
+
+- name: root zshrc
+  become: true
+  copy: >
+    src=root.zshrc
+    dest=/root/.zshrc
+    owner=root
+    group=root
+    mode="600"
+  tags:
+    - zsh
+
+- name: change login shells
+  become: true
+  user: name={{ item }} shell=/bin/zsh
+  with_items:
+    - "{{ ansible_ssh_user }}"
+    - root
+
