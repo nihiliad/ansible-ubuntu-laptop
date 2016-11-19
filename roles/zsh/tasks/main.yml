@@ -13,22 +13,52 @@
   git: >
     repo=https://github.com/bhilburn/powerlevel9k.git
     dest=/usr/local/bin/oh-my-zsh/custom/themes/powerlevel9k
+  tags:
+    - zsh
 
 - name: install syntax highlighting plugin
   git: >
     repo=git://github.com/zsh-users/zsh-syntax-highlighting.git
     dest=/usr/local/bin/oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+  tags:
+    - zsh
+
+- name: global config directory
+  become: true
+  file: >
+    path=/usr/local/etc/zsh
+    owner=root
+    group=root
+    mode="755"
+  tags:
+    - zsh
+
+- name: global config extensions directory
+  become: true
+  file: >
+    path=/usr/local/etc/zsh/zprofile.d
+    owner=root
+    group=root
+    mode="755"
+  tags:
+    - zsh
 
 - name: global zshrc
   become: true
   template: >
     src=global.zshrc.j2
-    dest=/usr/local/etc/zsh.zshrc
+    dest=/usr/local/etc/zsh/zshrc
     owner=root
     group=root
     mode="644"
   tags:
     - zsh
+
+- name: ensure global zshrc invocation
+  become: true
+  lineinfile: >
+    dest=/etc/zsh/zshenv
+    line="source /usr/local/etc/zsh.zshrc"
 
 - name: user zshrc
   copy: >
