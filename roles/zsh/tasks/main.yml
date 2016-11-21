@@ -23,20 +23,11 @@
   tags:
     - zsh
 
-- name: global config directory
-  become: true
-  file: >
-    path=/usr/local/etc/zsh
-    owner=root
-    group=root
-    mode="755"
-  tags:
-    - zsh
-
-- name: global config extensions directory
+- name: global config & config extensions directories
   become: true
   file: >
     path=/usr/local/etc/zsh/zprofile.d
+    state=directory
     owner=root
     group=root
     mode="755"
@@ -57,8 +48,8 @@
 - name: ensure global zshrc invocation
   become: true
   lineinfile: >
-    dest=/etc/zsh/zshenv
-    line="source /usr/local/etc/zsh.zshrc"
+    dest=/etc/zsh/zshrc
+    line="source /usr/local/etc/zsh/zshrc"
 
 - name: user zshrc
   copy: >
