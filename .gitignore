@@ -1,1 +1,3 @@
 .vagrant
+library/dconf
+library/gsetting

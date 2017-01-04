@@ -2,6 +2,15 @@
 
 Set up an Ubuntu laptop with Ansible.
 
+## DConf/GSettings
+
+To make DConf changes, we manually install these third-party Ansible modules into `library/`:
+
+* [ansible-dconf](https://github.com/jistr/ansible-dconf)
+* [ansible-gsetting](https://github.com/jistr/ansible-gsetting)
+
+See the documentation at the links above for installation instructions.
+
 ## Testing with Vagrant
 
 ### vagrant provision
