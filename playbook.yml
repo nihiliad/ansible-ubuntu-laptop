@@ -8,12 +8,8 @@
     - backintime
     - bluetooth
     - git
-    - dropbox
     - powerline
     - vim
     - zsh
-
-  tasks:
-    #    - name: install dropbox
-    #  apt: name=nautilus-dropbox state=present
-
+    - terminix
+    - standalone-packages
