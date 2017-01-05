@@ -5,32 +5,35 @@
     - zsh
 
 - name: install Oh My ZSH!
-  shell: ZSH=/usr/local/bin/oh-my-zsh sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+  shell: ZSH={{ zsh_global_oh_my_zsh_root }} sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
   tags:
     - zsh
 
 - name: install powerlevel9k theme
   git: >
     repo=https://github.com/bhilburn/powerlevel9k.git
-    dest=/usr/local/bin/oh-my-zsh/custom/themes/powerlevel9k
+    dest={{ zsh_global_oh_my_zsh_root }}/custom/themes/powerlevel9k
   tags:
     - zsh
 
 - name: install syntax highlighting plugin
   git: >
     repo=git://github.com/zsh-users/zsh-syntax-highlighting.git
-    dest=/usr/local/bin/oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+    dest={{ zsh_global_oh_my_zsh_root }}/custom/plugins/zsh-syntax-highlighting
   tags:
     - zsh
 
-- name: global config & config extensions directories
+- name: global config & zprofile.d directories
   become: true
   file: >
-    path=/usr/local/etc/zsh/zprofile.d
+    path={{ item }}
     state=directory
     owner=root
     group=root
     mode="755"
+  with_items:
+    - "{{ zsh_global_config_root }}"
+    - "{{ zsh_global_zprofiled }}"
   tags:
     - zsh
 
@@ -38,7 +41,7 @@
   become: true
   template: >
     src=global.zshrc.j2
-    dest=/usr/local/etc/zsh/zshrc
+    dest={{ zsh_global_config_root }}/zshrc
     owner=root
     group=root
     mode="644"
@@ -49,7 +52,9 @@
   become: true
   lineinfile: >
     dest=/etc/zsh/zshrc
-    line="source /usr/local/etc/zsh/zshrc"
+    line="source {{ zsh_global_config_root }}/zshrc"
+  tags:
+    - zsh
 
 - name: user zshrc
   copy: >
@@ -78,4 +83,5 @@
   with_items:
     - "{{ ansible_ssh_user }}"
     - root
-
+  tags:
+    - zsh
