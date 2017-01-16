@@ -1,0 +1,51 @@
+- name: visible-name
+  dconf: >
+    user={{ ansible_ssh_user }}
+    key=/com/gexperts/Terminix/profiles/{{ terminix_default_profile_id }}/visible-name
+    value="'Default'"
+  tags:
+    - terminix
+
+# Notes on terminal and other colors:
+# Bash directory ls color: #3465a4
+# A lighter shade/tint of the above: #4c82c6
+# Another color I like, from the Ravefinity Vivacious-Dark-Aqua theme: #2dacd4
+- name: terminal-title
+  dconf: >
+    user={{ ansible_ssh_user }}
+    key=/com/gexperts/Terminix/profiles/{{ terminix_default_profile_id }}/terminal-title
+    value="'${id}: <span foreground="#4c82c6"> ${directory}</span>'"
+  tags:
+    - terminix
+
+- name: use-theme-colors
+  dconf: >
+    user={{ ansible_ssh_user }}
+    key=/com/gexperts/Terminix/profiles/{{ terminix_default_profile_id }}/use-theme-colors
+    value=false
+  tags:
+    - terminix
+
+- name: background-color
+  dconf: >
+    user={{ ansible_ssh_user }}
+    key=/com/gexperts/Terminix/profiles/{{ terminix_default_profile_id }}/background-color
+    value="'#000000000000'"
+  tags:
+    - terminix
+
+- name: foreground-color
+  dconf: >
+    user={{ ansible_ssh_user }}
+    key=/com/gexperts/Terminix/profiles/{{ terminix_default_profile_id }}/foreground-color
+    value="'#FFFFFFFFFFFF'"
+  tags:
+    - terminix
+
+- name: background-transparency-percent
+  dconf: >
+    user={{ ansible_ssh_user }}
+    key=/com/gexperts/Terminix/profiles/{{ terminix_default_profile_id }}/background-transparency-percent
+    value=25
+  tags:
+    - terminix

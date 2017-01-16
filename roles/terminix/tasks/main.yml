@@ -9,75 +9,12 @@
   tags:
     - terminix
 
-- name: focus-follow-mouse
-  dconf: >
-    user={{ ansible_ssh_user }}
-    key=/com/gexperts/Terminix/focus-follow-mouse
-    value=true
+- name: general settings
+  include: general-settings.yml
   tags:
     - terminix
 
-- name: copy-on-select
-  dconf: >
-    user={{ ansible_ssh_user }}
-    key=/com/gexperts/Terminix/copy-on-select
-    value=true
+- name: default profile
+  include: default-profile.yml
   tags:
     - terminix
-
-- name: terminal-title-style
-  dconf: >
-    user={{ ansible_ssh_user }}
-    key=/com/gexperts/Terminix/terminal-title-style
-    value="'small'"
-  tags:
-    - terminix
-
-- name: theme-variant
-  dconf: >
-    user={{ ansible_ssh_user }}
-    key=/com/gexperts/Terminix/theme-variant
-    value="'dark'"
-  tags:
-    - terminix
-
-- name: default profile - visible-name
-  dconf: >
-    user={{ ansible_ssh_user }}
-    key=/com/gexperts/Terminix/profiles/{{ terminix_default_profile_id }}/visible-name
-    value="'Default'"
-  tags:
-    - terminix
-
-- name: default profile - use-theme-colors
-  dconf: >
-    user={{ ansible_ssh_user }}
-    key=/com/gexperts/Terminix/profiles/{{ terminix_default_profile_id }}/use-theme-colors
-    value=false
-  tags:
-    - terminix
-
-- name: default profile - background-color
-  dconf: >
-    user={{ ansible_ssh_user }}
-    key=/com/gexperts/Terminix/profiles/{{ terminix_default_profile_id }}/background-color
-    value="'#000000000000'"
-  tags:
-    - terminix
-
-- name: default profile - foreground-color
-  dconf: >
-    user={{ ansible_ssh_user }}
-    key=/com/gexperts/Terminix/profiles/{{ terminix_default_profile_id }}/foreground-color
-    value="'#FFFFFFFFFFFF'"
-  tags:
-    - terminix
-
-- name: default profile - background-transparency-percent
-  dconf: >
-    user={{ ansible_ssh_user }}
-    key=/com/gexperts/Terminix/profiles/{{ terminix_default_profile_id }}/background-transparency-percent
-    value=25
-  tags:
-    - terminix
-
