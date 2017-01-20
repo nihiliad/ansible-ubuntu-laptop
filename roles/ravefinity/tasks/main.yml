@@ -1,0 +1,15 @@
+---
+- name: apt repository
+  apt_repository: repo='ppa:ravefinity-project/ppa'
+  tags:
+    - ravefinity
+
+- name: theme
+  include: theme.yml
+  tags:
+    - ravefinity
+
+- name: icons
+  include: icons.yml
+  tags:
+    - ravefinity

@@ -4,6 +4,7 @@
     user={{ ansible_ssh_user }}
     key=/com/gexperts/Terminix/focus-follow-mouse
     value=true
+  notify: restart unity
   tags:
     - terminix
 
@@ -12,6 +13,7 @@
     user={{ ansible_ssh_user }}
     key=/com/gexperts/Terminix/copy-on-select
     value=true
+  notify: restart unity
   tags:
     - terminix
 
@@ -20,6 +22,7 @@
     user={{ ansible_ssh_user }}
     key=/com/gexperts/Terminix/terminal-title-style
     value="'small'"
+  notify: restart unity
   tags:
     - terminix
 
@@ -28,5 +31,6 @@
     user={{ ansible_ssh_user }}
     key=/com/gexperts/Terminix/theme-variant
     value="'dark'"
+  notify: restart unity
   tags:
     - terminix

@@ -1,0 +1,13 @@
+---
+- name: icons - install
+  apt: name=vibrantly-simple-icon-theme state=present update_cache=yes
+  tags:
+    - ravefinity
+
+- name: icons - icon-theme
+  dconf: >
+    user={{ ansible_ssh_user }}
+    key=/org/gnome/desktop/interface/icon-theme
+    value="'Vibrantly-Simple-Dark-Purple'"
+  notify: restart unity
+  tags: ravefinity
