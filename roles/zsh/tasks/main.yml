@@ -1,6 +1,8 @@
 ---
 - name: install
-  apt: name=zsh state=present
+  apt:
+    name: zsh
+    state: present
   tags:
     - zsh
 
@@ -10,76 +12,75 @@
     - zsh
 
 - name: install powerlevel9k theme
-  git: >
-    repo=https://github.com/bhilburn/powerlevel9k.git
-    dest={{ zsh_global_oh_my_zsh_root }}/custom/themes/powerlevel9k
+  git:
+    repo: https://github.com/bhilburn/powerlevel9k.git
+    dest: "{{ zsh_global_oh_my_zsh_root }}/custom/themes/powerlevel9k"
   tags:
     - zsh
 
 - name: install syntax highlighting plugin
-  git: >
-    repo=git://github.com/zsh-users/zsh-syntax-highlighting.git
-    dest={{ zsh_global_oh_my_zsh_root }}/custom/plugins/zsh-syntax-highlighting
+  git:
+    repo: git://github.com/zsh-users/zsh-syntax-highlighting.git
+    dest: "{{ zsh_global_oh_my_zsh_root }}/custom/plugins/zsh-syntax-highlighting"
   tags:
     - zsh
 
-- name: global config & zprofile.d directories
+- name: global config directory
   become: true
-  file: >
-    path={{ item }}
-    state=directory
-    owner=root
-    group=root
-    mode="755"
-  with_items:
-    - "{{ zsh_global_config_root }}"
-    - "{{ zsh_global_zprofiled }}"
+  file:
+    path: "{{ zsh_global_config_root }}"
+    state: directory
+    owner: root
+    group: root
+    mode: "755"
   tags:
     - zsh
 
 - name: global zshrc
   become: true
-  template: >
-    src=global.zshrc.j2
-    dest={{ zsh_global_config_root }}/zshrc
-    owner=root
-    group=root
-    mode="644"
+  template:
+    src: global.zshrc.j2
+    dest: "{{ zsh_global_config_root }}/zshrc"
+    owner: root
+    group: root
+    mode: "644"
   tags:
     - zsh
 
 - name: ensure global zshrc invocation
   become: true
-  lineinfile: >
-    dest=/etc/zsh/zshrc
-    line="source {{ zsh_global_config_root }}/zshrc"
+  lineinfile:
+    dest: /etc/zsh/zshrc
+    line: "source {{ zsh_global_config_root }}/zshrc"
   tags:
     - zsh
 
 - name: user zshrc
-  copy: >
-    src=user.zshrc
-    dest=/home/{{ ansible_ssh_user }}/.zshrc
-    owner={{ ansible_ssh_user }}
-    group={{ ansible_ssh_user }}
-    mode="600"
+  copy:
+    src: user.zshrc
+    dest: /home/{{ ansible_ssh_user }}/.zshrc
+    owner: "{{ ansible_ssh_user }}"
+    group: "{{ ansible_ssh_user }}"
+    mode: "600"
   tags:
     - zsh
 
 - name: root zshrc
   become: true
-  copy: >
-    src=root.zshrc
-    dest=/root/.zshrc
-    owner=root
-    group=root
-    mode="600"
+  copy:
+    src: root.zshrc
+    dest: /root/.zshrc
+    owner: root
+    group: root
+    mode: "600"
   tags:
     - zsh
 
 - name: change login shells
   become: true
-  user: name={{ item }} shell=/bin/zsh
+  user:
+    name: "{{ item }}"
+    shell: /bin/zsh
   with_items:
     - "{{ ansible_ssh_user }}"
     - root
