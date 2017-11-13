@@ -1,13 +1,27 @@
 ---
 - name: install
   apt:
-    name: zsh
+    name: "{{ item }}"
     state: present
+  with_items:
+    - zsh
+    - direnv
   tags:
     - zsh
 
 - name: install Oh My ZSH!
   shell: ZSH={{ zsh_global_oh_my_zsh_root }} sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+  tags:
+    - zsh
+
+- name: direnv hook
+  become: true
+  copy:
+    src: direnv.zsh
+    dest: "{{ zsh_global_oh_my_zsh_root }}/direnv.sh"
+    owner: root
+    group: root
+    mode: "644"
   tags:
     - zsh
 
