@@ -52,5 +52,5 @@ Even more control via named snapshots:
 ```bashrc
 vagrant snapshot save snapshot-name
 vagrant provision
-vagrant snapshot resotre snapshot-name --no-provision
+vagrant snapshot restore snapshot-name --no-provision
 ```
