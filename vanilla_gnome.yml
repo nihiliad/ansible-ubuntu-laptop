@@ -1,0 +1,28 @@
+---
+# This playbook installs vanilla GNOME in Ubuntu. Because this requires a machine
+# reboot, and the machine will sometimes by localhost, we put it in a separate playbook,
+# which will need to be executed before most, if not all, other playbooks.
+- hosts: all
+  become: true
+  vars:
+    ansible_user: vagrant
+
+  tasks:
+  - name: install vanilla gnome
+    apt:
+      name: "{{ item }}"
+      state: present
+    with_items:
+      - gnome-session
+      - ubuntu-gnome-default-settings
+      - vanilla-gnome-default-settings
+      - vanilla-gnome-desktop
+    tags:
+      - gnome
+
+  - name: reboot
+    # The extra syntax, in addition to just `shutdown -r now`, prevents
+    # Ansible from complaining that the machine is unreachable.
+    shell: sleep 2 && shutdown -r now
+    async: 1
+    poll: 0
