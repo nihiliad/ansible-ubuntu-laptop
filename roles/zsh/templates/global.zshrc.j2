@@ -98,15 +98,3 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-
-# Run config extensions:
-if [[ -d /usr/local/etc/zsh/zprofile.d ]]; then
-  # The (.N) turns on the null_glob option, which causes zsh to return an
-  # empty list if there are no *.sh files. Otherwise, we get an error.
-  for i in /usr/local/etc/zsh/zprofile.d/*.sh(.N); do
-    if [[ -r $i ]]; then
-      source $i
-    fi
-  done
-  unset i
-fi
