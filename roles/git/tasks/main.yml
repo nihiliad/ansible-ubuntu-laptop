@@ -1,6 +1,0 @@
----
-# Though it has no dependencies, this package is in its own role so that other roles may depend on it.
-- name: install
-  apt: name=git state=present
-  tags:
-    - git
