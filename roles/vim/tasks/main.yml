@@ -1,40 +1,52 @@
 ---
-- name: install
-  apt: name=vim state=present
+- name: install ubuntu packages
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - git
+    - powerline
+    - vim
   tags:
     - vim
 
 - name: vimrc
-  copy: >
-    src=vimrc
-    dest=/home/{{ ansible_user }}/.vimrc
-    owner={{ ansible_user }}
-    group={{ ansible_user }}
-    mode=0664
+  copy:
+    src: vimrc
+    dest: /home/{{ ansible_user }}/.vimrc
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0664
   tags:
     - vim
 
 - name: .vim directory
-  file: path=/home/{{ ansible_user }}/.vim state=directory
-    owner={{ ansible_user }}
-    group={{ ansible_user }}
-    mode=0775
+  file: 
+    path: /home/{{ ansible_user }}/.vim
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0775
   tags:
     - vim
 
 - name: NeoBundle directory
-  file: path=/home/{{ ansible_user }}/.vim/bundle state=directory
-    owner={{ ansible_user }}
-    group={{ ansible_user }}
-    mode=0775
+  file: 
+    path: /home/{{ ansible_user }}/.vim/bundle
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0775
   tags:
     - vim
     - neobundle
 
 - name: NeoBundle git clone
-  git: repo=https://github.com/Shougo/neobundle.vim dest=/home/{{ ansible_user }}/.vim/bundle/neobundle.vim
   become: yes
   become_user: "{{ ansible_user }}"
+  git:
+    repo: https://github.com/Shougo/neobundle.vim
+    dest: /home/{{ ansible_user }}/.vim/bundle/neobundle.vim
   tags:
     - vim
     - neobundle
@@ -46,9 +58,9 @@
 #    - neobundle
 
 - name: NeoBundle install
-  shell: /home/{{ ansible_user }}/.vim/bundle/neobundle.vim/bin/neoinstall
   become: yes
   become_user: "{{ ansible_user }}"
+  shell: /home/{{ ansible_user }}/.vim/bundle/neobundle.vim/bin/neoinstall
   tags:
     - vim
     - neobundle
