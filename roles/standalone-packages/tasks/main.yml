@@ -1,9 +1,10 @@
 ---
-
-# The packages do not depend on using a PPA, require no config, and no roles depend on them.
+# These packages do not depend on using a PPA and require no config. No roles depend on them.
 
 - name: install
-  apt: name={{ item }} state=present
+  apt:
+    name: "{{ item }}"
+    state: present
   with_items:
     - nautilus-dropbox
     - tree
