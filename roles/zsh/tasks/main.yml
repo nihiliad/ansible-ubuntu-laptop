@@ -1,11 +1,13 @@
 ---
-- name: install
+- name: install ubuntu packages
   apt:
     name: "{{ item }}"
     state: present
   with_items:
-    - zsh
     - direnv
+    - git
+    - powerline
+    - zsh
   tags:
     - zsh
 
@@ -18,7 +20,7 @@
   become: true
   copy:
     src: direnv.zsh
-    dest: "{{ zsh_global_oh_my_zsh_root }}/direnv.sh"
+    dest: "{{ zsh_global_oh_my_zsh_root }}/custom/direnv.sh"
     owner: root
     group: root
     mode: "644"
