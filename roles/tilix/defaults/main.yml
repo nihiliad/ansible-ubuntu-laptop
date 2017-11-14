@@ -1,4 +1,4 @@
 ---
 # Will this ID always be the same? Hope so, otherwise we may have
 # to find a way to capture it.
-terminix_default_profile_id: 2b7c4080-0ddd-46c5-8f23-563fd3ba789d
+tilix_default_profile_id: 2b7c4080-0ddd-46c5-8f23-563fd3ba789d

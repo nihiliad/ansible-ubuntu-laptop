@@ -1,0 +1,25 @@
+---
+- name: apt repository
+  apt_repository:
+    # The PPA still uses the old name.
+    repo: 'ppa:webupd8team/terminix'
+  tags:
+    - tilix
+
+- name: install
+  apt: 
+    name: tilix
+    state: present
+    update_cache: yes
+  tags:
+    - tilix
+
+- name: general settings
+  include: general-settings.yml
+  tags:
+    - tilix
+
+- name: default profile
+  include: default-profile.yml
+  tags:
+    - tilix

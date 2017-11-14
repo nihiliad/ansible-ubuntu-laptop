@@ -2,35 +2,35 @@
 - name: focus-follow-mouse
   dconf: >
     user={{ ansible_ssh_user }}
-    key=/com/gexperts/Terminix/focus-follow-mouse
+    key=/com/gexperts/Tilix/focus-follow-mouse
     value=true
   notify: restart unity
   tags:
-    - terminix
+    - tilix
 
 - name: copy-on-select
   dconf: >
     user={{ ansible_ssh_user }}
-    key=/com/gexperts/Terminix/copy-on-select
+    key=/com/gexperts/Tilix/copy-on-select
     value=true
   notify: restart unity
   tags:
-    - terminix
+    - tilix
 
 - name: terminal-title-style
   dconf: >
     user={{ ansible_ssh_user }}
-    key=/com/gexperts/Terminix/terminal-title-style
+    key=/com/gexperts/Tilix/terminal-title-style
     value="'small'"
   notify: restart unity
   tags:
-    - terminix
+    - tilix
 
 - name: theme-variant
   dconf: >
     user={{ ansible_ssh_user }}
-    key=/com/gexperts/Terminix/theme-variant
+    key=/com/gexperts/Tilix/theme-variant
     value="'dark'"
   notify: restart unity
   tags:
-    - terminix
+    - tilix

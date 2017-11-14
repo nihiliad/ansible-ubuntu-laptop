@@ -1,11 +1,11 @@
 - name: visible-name
   dconf: >
     user={{ ansible_ssh_user }}
-    key=/com/gexperts/Terminix/profiles/{{ terminix_default_profile_id }}/visible-name
+    key=/com/gexperts/Tilix/profiles/{{ tilix_default_profile_id }}/visible-name
     value="'Default'"
   notify: restart unity
   tags:
-    - terminix
+    - tilix
 
 # Notes on terminal and other colors:
 # Bash directory ls color: #3465a4
@@ -14,44 +14,44 @@
 - name: terminal-title
   dconf: >
     user={{ ansible_ssh_user }}
-    key=/com/gexperts/Terminix/profiles/{{ terminix_default_profile_id }}/terminal-title
-    value="'${id}: <span foreground="#4c82c6"> ${directory}</span>'"
+    key=/com/gexperts/Tilix/profiles/{{ tilix_default_profile_id }}/terminal-title
+    value="'${id}: <span foreground="#4c82c6">${directory}</span>'"
   notify: restart unity
   tags:
-    - terminix
+    - tilix
 
 - name: use-theme-colors
   dconf: >
     user={{ ansible_ssh_user }}
-    key=/com/gexperts/Terminix/profiles/{{ terminix_default_profile_id }}/use-theme-colors
+    key=/com/gexperts/Tilix/profiles/{{ tilix_default_profile_id }}/use-theme-colors
     value=false
   notify: restart unity
   tags:
-    - terminix
+    - tilix
 
 - name: background-color
   dconf: >
     user={{ ansible_ssh_user }}
-    key=/com/gexperts/Terminix/profiles/{{ terminix_default_profile_id }}/background-color
+    key=/com/gexperts/Tilix/profiles/{{ tilix_default_profile_id }}/background-color
     value="'#000000000000'"
   notify: restart unity
   tags:
-    - terminix
+    - tilix
 
 - name: foreground-color
   dconf: >
     user={{ ansible_ssh_user }}
-    key=/com/gexperts/Terminix/profiles/{{ terminix_default_profile_id }}/foreground-color
+    key=/com/gexperts/Tilix/profiles/{{ tilix_default_profile_id }}/foreground-color
     value="'#FFFFFFFFFFFF'"
   notify: restart unity
   tags:
-    - terminix
+    - tilix
 
 - name: background-transparency-percent
   dconf: >
     user={{ ansible_ssh_user }}
-    key=/com/gexperts/Terminix/profiles/{{ terminix_default_profile_id }}/background-transparency-percent
+    key=/com/gexperts/Tilix/profiles/{{ tilix_default_profile_id }}/background-transparency-percent
     value=25
   notify: restart unity
   tags:
-    - terminix
+    - tilix
