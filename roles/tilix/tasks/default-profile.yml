@@ -3,7 +3,6 @@
     user={{ ansible_ssh_user }}
     key=/com/gexperts/Tilix/profiles/{{ tilix_default_profile_id }}/visible-name
     value="'Default'"
-  notify: restart unity
   tags:
     - tilix
 
@@ -16,7 +15,6 @@
     user={{ ansible_ssh_user }}
     key=/com/gexperts/Tilix/profiles/{{ tilix_default_profile_id }}/terminal-title
     value="'${id}: <span foreground="#4c82c6">${directory}</span>'"
-  notify: restart unity
   tags:
     - tilix
 
@@ -25,7 +23,6 @@
     user={{ ansible_ssh_user }}
     key=/com/gexperts/Tilix/profiles/{{ tilix_default_profile_id }}/use-theme-colors
     value=false
-  notify: restart unity
   tags:
     - tilix
 
@@ -34,7 +31,6 @@
     user={{ ansible_ssh_user }}
     key=/com/gexperts/Tilix/profiles/{{ tilix_default_profile_id }}/background-color
     value="'#000000000000'"
-  notify: restart unity
   tags:
     - tilix
 
@@ -43,7 +39,6 @@
     user={{ ansible_ssh_user }}
     key=/com/gexperts/Tilix/profiles/{{ tilix_default_profile_id }}/foreground-color
     value="'#FFFFFFFFFFFF'"
-  notify: restart unity
   tags:
     - tilix
 
@@ -52,6 +47,5 @@
     user={{ ansible_ssh_user }}
     key=/com/gexperts/Tilix/profiles/{{ tilix_default_profile_id }}/background-transparency-percent
     value=25
-  notify: restart unity
   tags:
     - tilix

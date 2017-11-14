@@ -4,7 +4,6 @@
     user={{ ansible_ssh_user }}
     key=/com/gexperts/Tilix/focus-follow-mouse
     value=true
-  notify: restart unity
   tags:
     - tilix
 
@@ -13,7 +12,6 @@
     user={{ ansible_ssh_user }}
     key=/com/gexperts/Tilix/copy-on-select
     value=true
-  notify: restart unity
   tags:
     - tilix
 
@@ -22,7 +20,6 @@
     user={{ ansible_ssh_user }}
     key=/com/gexperts/Tilix/terminal-title-style
     value="'small'"
-  notify: restart unity
   tags:
     - tilix
 
@@ -31,6 +28,5 @@
     user={{ ansible_ssh_user }}
     key=/com/gexperts/Tilix/theme-variant
     value="'dark'"
-  notify: restart unity
   tags:
     - tilix
