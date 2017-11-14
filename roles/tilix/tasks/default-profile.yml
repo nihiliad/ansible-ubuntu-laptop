@@ -1,51 +1,39 @@
 - name: visible-name
-  dconf: >
-    user={{ ansible_ssh_user }}
-    key=/com/gexperts/Tilix/profiles/{{ tilix_default_profile_id }}/visible-name
-    value="'Default'"
-  tags:
-    - tilix
+  dconf:
+    user: "{{ ansible_ssh_user }}"
+    key: /com/gexperts/Tilix/profiles/{{ tilix_default_profile_id }}/visible-name
+    value: "'Default'"
 
 # Notes on terminal and other colors:
 # Bash directory ls color: #3465a4
 # A lighter shade/tint of the above: #4c82c6
 # Another color I like, from the Ravefinity Vivacious-Dark-Aqua theme: #2dacd4
 - name: terminal-title
-  dconf: >
-    user={{ ansible_ssh_user }}
-    key=/com/gexperts/Tilix/profiles/{{ tilix_default_profile_id }}/terminal-title
-    value="'${id}: <span foreground="#4c82c6">${directory}</span>'"
-  tags:
-    - tilix
+  dconf:
+    user: "{{ ansible_ssh_user }}"
+    key: /com/gexperts/Tilix/profiles/{{ tilix_default_profile_id }}/terminal-title
+    value: "'${id}: <span foreground=\"#4c82c6\">${title}</span>'"
 
 - name: use-theme-colors
-  dconf: >
-    user={{ ansible_ssh_user }}
-    key=/com/gexperts/Tilix/profiles/{{ tilix_default_profile_id }}/use-theme-colors
-    value=false
-  tags:
-    - tilix
+  dconf:
+    user: "{{ ansible_ssh_user }}"
+    key: /com/gexperts/Tilix/profiles/{{ tilix_default_profile_id }}/use-theme-colors
+    value: "false"
 
 - name: background-color
-  dconf: >
-    user={{ ansible_ssh_user }}
-    key=/com/gexperts/Tilix/profiles/{{ tilix_default_profile_id }}/background-color
-    value="'#000000000000'"
-  tags:
-    - tilix
+  dconf:
+    user: "{{ ansible_ssh_user }}"
+    key: /com/gexperts/Tilix/profiles/{{ tilix_default_profile_id }}/background-color
+    value: "'#000000000000'"
 
 - name: foreground-color
-  dconf: >
-    user={{ ansible_ssh_user }}
-    key=/com/gexperts/Tilix/profiles/{{ tilix_default_profile_id }}/foreground-color
-    value="'#FFFFFFFFFFFF'"
-  tags:
-    - tilix
+  dconf:
+    user: "{{ ansible_ssh_user }}"
+    key: /com/gexperts/Tilix/profiles/{{ tilix_default_profile_id }}/foreground-color
+    value: "'#FFFFFFFFFFFF'"
 
 - name: background-transparency-percent
-  dconf: >
-    user={{ ansible_ssh_user }}
-    key=/com/gexperts/Tilix/profiles/{{ tilix_default_profile_id }}/background-transparency-percent
-    value=25
-  tags:
-    - tilix
+  dconf:
+    user: "{{ ansible_ssh_user }}"
+    key: /com/gexperts/Tilix/profiles/{{ tilix_default_profile_id }}/background-transparency-percent
+    value: 25

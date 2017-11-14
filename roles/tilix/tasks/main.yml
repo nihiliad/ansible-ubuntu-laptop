@@ -15,11 +15,11 @@
     - tilix
 
 - name: general settings
-  include: general-settings.yml
+  import_tasks: general-settings.yml
   tags:
     - tilix
 
 - name: default profile
-  include: default-profile.yml
+  import_tasks: default-profile.yml
   tags:
     - tilix

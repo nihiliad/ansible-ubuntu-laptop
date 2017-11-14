@@ -1,32 +1,24 @@
 ---
 - name: focus-follow-mouse
-  dconf: >
-    user={{ ansible_ssh_user }}
-    key=/com/gexperts/Tilix/focus-follow-mouse
-    value=true
-  tags:
-    - tilix
+  dconf:
+    user: "{{ ansible_ssh_user }}"
+    key: /com/gexperts/Tilix/focus-follow-mouse
+    value: "true"
 
 - name: copy-on-select
-  dconf: >
-    user={{ ansible_ssh_user }}
-    key=/com/gexperts/Tilix/copy-on-select
-    value=true
-  tags:
-    - tilix
+  dconf:
+    user: "{{ ansible_ssh_user }}"
+    key: /com/gexperts/Tilix/copy-on-select
+    value: "true"
 
 - name: terminal-title-style
-  dconf: >
-    user={{ ansible_ssh_user }}
-    key=/com/gexperts/Tilix/terminal-title-style
-    value="'small'"
-  tags:
-    - tilix
+  dconf:
+    user: "{{ ansible_ssh_user }}"
+    key: /com/gexperts/Tilix/terminal-title-style
+    value: "'small'"
 
 - name: theme-variant
-  dconf: >
-    user={{ ansible_ssh_user }}
-    key=/com/gexperts/Tilix/theme-variant
-    value="'dark'"
-  tags:
-    - tilix
+  dconf:
+    user: "{{ ansible_ssh_user }}"
+    key: /com/gexperts/Tilix/theme-variant
+    value: "'dark'"
