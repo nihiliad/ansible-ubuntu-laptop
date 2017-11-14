@@ -1,5 +1,0 @@
----
-- name: restart unity
-  service: name=lightdm state=restarted
-  tags:
-    - unity
