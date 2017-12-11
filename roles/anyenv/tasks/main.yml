@@ -1,0 +1,21 @@
+---
+- name: install
+  git: >
+    repo={{ anyenv_git_url }}
+    dest={{ anyenv_root }}
+
+- name: directories
+  file: >
+    state=directory
+    path={{ anyenv_root }}
+    owner={{ anyenv_user }}
+    group={{ anyenv_group }}
+    mode={{ anyenv_dir_mode }}
+
+- name: common env file
+  template: >
+    src=anyenv.sh.j2
+    dest={{ anyenv_common_env_file }}
+    owner={{ anyenv_user }}
+    group={{ anyenv_group }}
+    mode={{ anyenv_file_mode }}

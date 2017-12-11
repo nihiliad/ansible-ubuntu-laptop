@@ -1,0 +1,9 @@
+anyenv_git_url: https://github.com/riywo/anyenv
+anyenv_dir_mode: "{{ common_dir_mode }}"
+anyenv_file_mode: "{{ common_file_mode }}"
+anyenv_user: "{{ common_user }}"
+anyenv_group: "{{ common_group }}"
+anyenv_root: /home/{{ common_user }}/.anyenv
+anyenv_bin: "{{ anyenv_root }}/bin"
+anyenv_envs_dir: "{{ anyenv_root }}/envs"
+anyenv_common_env_file: "{{ common_profile_dir }}/anyenv.sh"
