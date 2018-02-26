@@ -1,0 +1,27 @@
+---
+# Inspired by: https://help.gnome.org/admin//system-admin-guide/3.12/extensions-mandatory.html.en
+
+- name: dconf extensions file
+  copy:
+    src: 00-extensions
+    dest: "{{ dconf_config_db_locald_dir }}/00-extensions"
+    owner: root
+    group: root
+    mode: "644"
+  tags:
+    - gnome_shell_extensions
+
+- name: dconf extensions lock file
+  copy:
+    src: locked-extensions
+    dest: "{{ dconf_config_db_locald_locks_dir }}/locked-extensions"
+    owner: root
+    group: root
+    mode: "644"
+  tags:
+    - gnome_shell_extensions
+
+- name: update dconf db
+  command: dconf update
+  tags:
+    - gnome_shell_extensions
