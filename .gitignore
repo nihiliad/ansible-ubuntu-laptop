@@ -1,3 +1,4 @@
 .vagrant
+playbook.retry
 library/dconf
 library/gsetting
