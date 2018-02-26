@@ -1,0 +1,26 @@
+---
+- name: directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: root
+    group: root
+    mode: "755"
+  with_items:
+    - "{{ dconf_config_root }}"
+    - "{{ dconf_config_profile_dir }}"
+    - "{{ dconf_config_db_dir }}"
+    - "{{ dconf_config_db_locald_dir }}"
+    - "{{ dconf_config_db_locald_locks_dir }}"
+  tags:
+    - dconf_config
+
+- name: user profile
+  copy:
+    src: user
+    dest: "{{ dconf_config_profile_dir }}/user"
+    owner: root
+    group: root
+    mode: "644"
+  tags:
+    - dconf_config

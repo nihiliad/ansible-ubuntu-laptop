@@ -1,0 +1,6 @@
+---
+dconf_config_root: /etc/dconf
+dconf_config_profile_dir: "{{ dconf_config_root }}/profile"
+dconf_config_db_dir: "{{ dconf_config_root }}/db"
+dconf_config_db_locald_dir: "{{ dconf_config_db_dir }}/local.d"
+dconf_config_db_locald_locks_dir: "{{ dconf_config_db_locald_dir }}/locks"
