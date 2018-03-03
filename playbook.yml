@@ -7,7 +7,7 @@
     - atom
     - backintime
     - bluetooth
-    - dconf_config
+    - dconf_dependencies
     - gnome_shell_extensions
     - materia_theme
     - tilix
