@@ -1,0 +1,10 @@
+---
+- name: apt repository
+  apt_repository:
+    repo: 'ppa:dyatlov-igor/materia-theme'
+
+- name: apt package
+  apt: 
+    name: materia-theme
+    state: present
+    update_cache: yes

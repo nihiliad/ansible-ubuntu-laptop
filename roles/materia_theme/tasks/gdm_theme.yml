@@ -1,0 +1,25 @@
+---
+- name: back up default theme
+  copy:
+    src: "{{ item }}"
+    dest: "{{ item }}.bak"
+    owner: root
+    group: root
+    mode: "644"
+    remote_src: yes
+  with_items:
+    - /usr/share/gnome-shell/gnome-shell-theme.gresource
+    - /usr/share/gnome-shell/theme/ubuntu.css
+
+- name: install materia theme
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: root
+    group: root
+    mode: "644"
+    remote_src: yes
+  with_items:
+    - { src: "/usr/share/themes/{{ materia_theme_variant }}/gnome-shell/gnome-shell-theme.gresource", dest: "/usr/share/gnome-shell/gnome-shell-theme.gresource"}
+    # Not sure that we really need this, since we're running vanilla GNOME in Ubuntu, but following the instructions, anyway:
+    - { src: "/usr/share/themes/{{ materia_theme_variant }}/gnome-shell/gnome-shell.css", dest: "/usr/share/gnome-shell/theme/ubuntu.css"}

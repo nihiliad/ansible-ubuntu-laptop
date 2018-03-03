@@ -1,0 +1,15 @@
+---
+- name: install
+  import_tasks: install.yml
+  tags:
+    - materia_theme
+
+- name: gdm theme
+  import_tasks: gdm_theme.yml
+  tags:
+    - materia_theme
+
+- name: dconf
+  import_tasks: dconf.yml
+  tags:
+    - materia_theme

@@ -1,0 +1,12 @@
+---
+- name: write
+  become: true
+  become_user: "{{ ansible_ssh_user }}"
+  dconf:
+    key: "{{ item.key }}"
+    value: "{{ item.value }}"
+    state: present
+  with_items:
+    - { key: "/org/gnome/shell/enabled-extensions", value: "['user-theme@gnome-shell-extensions.gcampax.github.com']" }
+    - { key: "/org/gnome/shell/extensions/user-theme/name", value: "'{{ materia_theme_variant }}'" }
+    - { key: "/org/gnome/desktop/interface/gtk-theme", value: "'{{ materia_theme_variant }}'" }
