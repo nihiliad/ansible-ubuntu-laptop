@@ -1,0 +1,8 @@
+---
+- name: global gtk settings
+  template:
+    src: gtk_settings.ini.j2
+    dest: /home/{{ ansible_ssh_user }}/.config/gtk-3.0/settings.ini
+    owner: "{{ ansible_ssh_user }}"
+    group: "{{ ansible_ssh_user }}"
+    mode: "644"

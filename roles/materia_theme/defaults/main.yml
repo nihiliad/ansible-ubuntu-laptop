@@ -1,2 +1,3 @@
 ---
 materia_theme_variant: 'Materia-dark-compact'
+materia_theme_gtk_prefer_dark: 1

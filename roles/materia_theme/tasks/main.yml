@@ -13,3 +13,8 @@
   import_tasks: dconf.yml
   tags:
     - materia_theme
+
+- name: gtk settings
+  import_tasks: gtk_settings.yml
+  tags:
+    - materia_theme
