@@ -1,5 +1,5 @@
 ---
-- name: write
+- name: dconf write
   become: true
   become_user: "{{ ansible_ssh_user }}"
   dconf:

@@ -1,5 +1,5 @@
 ---
-- name: back up default theme
+- name: back up default gdm theme
   copy:
     src: "{{ item }}"
     dest: "{{ item }}.bak"
@@ -11,7 +11,7 @@
     - /usr/share/gnome-shell/gnome-shell-theme.gresource
     - /usr/share/gnome-shell/theme/ubuntu.css
 
-- name: install materia theme
+- name: install materia gdm theme
   copy:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
