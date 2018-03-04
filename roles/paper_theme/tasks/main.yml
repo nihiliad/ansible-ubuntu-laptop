@@ -1,0 +1,10 @@
+---
+- name: install
+  import_tasks: install.yml
+  tags:
+    - paper_theme
+
+- name: dconf
+  import_tasks: dconf.yml
+  tags:
+    - paper_theme

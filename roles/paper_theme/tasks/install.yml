@@ -1,0 +1,12 @@
+---
+- name: apt repository
+  apt_repository:
+    repo: 'ppa:snwh/pulp'
+
+- name: apt package
+  apt: 
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  with_items:
+    - paper-icon-theme

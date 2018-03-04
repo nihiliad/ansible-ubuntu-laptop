@@ -1,0 +1,10 @@
+---
+- name: dconf write
+  become: true
+  become_user: "{{ ansible_ssh_user }}"
+  dconf:
+    key: "{{ item.key }}"
+    value: "{{ item.value }}"
+    state: present
+  with_items:
+    - { key: "/org/gnome/desktop/interface/icon-theme", value: "'Paper'" }
