@@ -1,27 +1,94 @@
 ---
+# Packages will not show up in GNOME Tweak Tool until after a restart
+- name: apt install packages
+  apt:
+    name: "{{ item.1 }}"
+    state: present
+    update_cache: yes
+  with_subelements:
+    - "{{ gnome_shell_extensions_metadata }}"
+    - package
+    - skip_missing: yes
+  tags:
+    - gnome_shell_extensions
+
+- name: extensions root dir
+  file:
+    path: "{{ gnome_shell_extensions_root }}"
+    state: directory
+    owner: root
+    group: root
+    mode: "755"
+  tags:
+    - gnome_shell_extensions
+
+- name: extensions subdirs
+  file:
+    path: "{{ gnome_shell_extensions_root }}{{ item.0.uuid }}/"
+    state: directory
+    owner: root
+    group: root
+    mode: "755"
+  with_subelements:
+    - "{{ gnome_shell_extensions_metadata }}"
+    - download_url_version_tag
+    - skip_missing: yes
+  tags:
+    - gnome_shell_extensions
+
+- name: download packages
+  get_url:
+    url: "{{gnome_shell_extensions_download_url_prefix }}{{ item.0.uuid }}{{ gnome_shell_extensions_download_url_suffix }}{{ item.1 }}"
+    dest: "{{ gnome_shell_extensions_root }}{{ item.0.uuid }}/extension.zip"
+    owner: root
+    group: root
+    mode: "644"
+  with_subelements:
+    - "{{ gnome_shell_extensions_metadata }}"
+    - download_url_version_tag
+    - skip_missing: yes
+  tags:
+    - gnome_shell_extensions
+
+- name: unarchive packages
+  become: true
+  become_user: root
+  become_method: sudo
+  unarchive:
+    src: "{{ gnome_shell_extensions_root }}{{ item.0.uuid }}/extension.zip"
+    dest: "{{ gnome_shell_extensions_root }}{{ item.0.uuid }}"
+    creates: "{{ gnome_shell_extensions_root }}{{ item.0.uuid }}/extension.js"
+    owner: root
+    group: root
+  with_subelements:
+    - "{{ gnome_shell_extensions_metadata }}"
+    - download_url_version_tag
+    - skip_missing: yes
+  tags:
+    - gnome_shell_extensions
+
 # Inspired by: https://help.gnome.org/admin//system-admin-guide/3.12/extensions-mandatory.html.en
-
-- name: dconf extensions file
-  copy:
-    src: 00-extensions
-    dest: "{{ dconf_config_db_locald_dir }}/00-extensions"
-    owner: root
-    group: root
-    mode: "644"
-  tags:
-    - gnome_shell_extensions
-
-- name: dconf extensions lock file
-  copy:
-    src: locked-extensions
-    dest: "{{ dconf_config_db_locald_locks_dir }}/locked-extensions"
-    owner: root
-    group: root
-    mode: "644"
-  tags:
-    - gnome_shell_extensions
-
-- name: update dconf db
-  command: dconf update
-  tags:
-    - gnome_shell_extensions
+#- name: dconf extensions file
+#  copy:
+#    src: 00-extensions
+#    dest: "{{ dconf_db_locald_dir }}/00-extensions"
+#    owner: root
+#    group: root
+#    mode: "644"
+#  tags:
+#    - gnome_shell_extensions
+#
+#- name: dconf extensions lock file
+#  copy:
+#    src: locked-extensions
+#    dest: "{{ dconf_db_locald_locks_dir }}/locked-extensions"
+#    owner: root
+#    group: root
+#    mode: "644"
+#  tags:
+#    - gnome_shell_extensions
+#
+#- name: update dconf db
+#  command: dconf update
+#  tags:
+#    - gnome_shell_extensions
