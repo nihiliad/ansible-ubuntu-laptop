@@ -1,0 +1,61 @@
+---
+gnome_shell_extensions_root: /usr/local/share/gnome-shell/extensions/
+gnome_shell_extensions_download_url_prefix: https://extensions.gnome.org/download-extension/
+gnome_shell_extensions_download_url_suffix: ".shell-extension.zip?version_tag="
+gnome_shell_extensions_metadata:
+  - name: autohide battery
+    uuid: autohide-battery@sitnik.ru
+    download_url_version_tag:
+      - 6158
+
+  - name: coverflow alt-tab
+    uuid: CoverflowAltTab@palatis.blogspot.com
+    download_url_version_tag:
+      - 7587
+
+  - name: hide activities button
+    uuid: Hide_Activities@shay.shayel.org
+    package:
+      - gnome-shell-extension-hide-activities
+
+  - name: lock keys
+    uuid: lockkeys@vaina.lt
+    download_url_version_tag:
+      - 6425
+
+  # fork of frippery move clock, which is what I had installed previously
+  - name: move clock
+    uuid: Move_Clock@jonathan.bluemosh.com
+    package:
+      - gnome-shell-extension-move-clock
+
+  - name: multi monitors add-on
+    uuid: multi-monitors-add-on@spin83
+    package:
+      - gnome-shell-extension-multi-monitors
+
+  - name: quick close in overview
+    uuid: middleclickclose@paolo.tranquilli.gmail.com
+    download_url_version_tag:
+      - 7588
+
+  - name: refresh wifi connections
+    uuid: refresh-wifi@kgshank.net
+    download_url_version_tag:
+      - 7580
+
+  - name: removable drive menu
+    uuid: drive-menu@gnome-shell-extensions@gcampax.github.com
+
+  - name: system-monitor
+    uuid: system-monitor@paradoxxx.zero.gmail.com
+    package:
+      - gnome-shell-extension-system-monitor
+
+  - name: user themes
+    uuid: user-theme@gnome-shell-extensions@gcampax.github.com
+
+  - name: windowoverlay icons
+    uuid: windowoverlay-icons@sustmidown.centrum.cz
+    download_url_version_tag:
+      - 7621
