@@ -1,5 +1,6 @@
 ---
 - name: install ubuntu packages
+  become: true
   apt:
     name: "{{ item }}"
     state: present
@@ -12,6 +13,7 @@
     - zsh
 
 - name: install Oh My ZSH!
+  become: true
   shell: ZSH={{ zsh_global_oh_my_zsh_root }} sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
   tags:
     - zsh
@@ -28,6 +30,7 @@
     - zsh
 
 - name: install powerlevel9k theme
+  become: true
   git:
     repo: https://github.com/bhilburn/powerlevel9k.git
     dest: "{{ zsh_global_oh_my_zsh_root }}/custom/themes/powerlevel9k"
@@ -35,6 +38,7 @@
     - zsh
 
 - name: install syntax highlighting plugin
+  become: true
   git:
     repo: git://github.com/zsh-users/zsh-syntax-highlighting.git
     dest: "{{ zsh_global_oh_my_zsh_root }}/custom/plugins/zsh-syntax-highlighting"
@@ -74,9 +78,9 @@
 - name: user zshrc
   copy:
     src: user.zshrc
-    dest: /home/{{ ansible_ssh_user }}/.zshrc
-    owner: "{{ ansible_ssh_user }}"
-    group: "{{ ansible_ssh_user }}"
+    dest: /home/{{ zsh_default_user }}/.zshrc
+    owner: "{{ zsh_default_user }}"
+    group: "{{ zsh_default_user }}"
     mode: "600"
   tags:
     - zsh
@@ -98,7 +102,7 @@
     name: "{{ item }}"
     shell: /bin/zsh
   with_items:
-    - "{{ ansible_ssh_user }}"
+    - "{{ zsh_default_user }}"
     - root
   tags:
     - zsh

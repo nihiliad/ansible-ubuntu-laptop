@@ -1,3 +1,4 @@
 ---
+zsh_default_user: "{{ ansible_user_id }}"
 zsh_global_oh_my_zsh_root: /usr/local/bin/oh-my-zsh
 zsh_global_config_root: /usr/local/etc/zsh
