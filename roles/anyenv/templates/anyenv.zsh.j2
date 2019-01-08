@@ -1,6 +1,6 @@
 # Note: This syntax may work only in zsh:
 if ! type anyenv >/dev/null 2>&1; then
   typeset -U path
-  path=(~/.anyenv/bin ~/bin $path)
+  path=({{ anyenv_bin }} $path)
   eval "$(anyenv init -)"
 fi

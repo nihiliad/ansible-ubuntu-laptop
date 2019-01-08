@@ -1,21 +1,22 @@
 ---
-- name: install
-  git: >
-    repo={{ anyenv_git_url }}
-    dest={{ anyenv_root }}
-
 - name: directories
-  file: >
-    state=directory
-    path={{ anyenv_root }}
-    owner={{ anyenv_user }}
-    group={{ anyenv_group }}
-    mode={{ anyenv_dir_mode }}
+  file:
+    state: directory
+    path: "{{ anyenv_root }}"
+    owner: "{{ anyenv_user }}"
+    group: "{{ anyenv_group }}"
+    mode: "{{ anyenv_dir_mode }}"
 
-- name: common env file
-  template: >
-    src=anyenv.sh.j2
-    dest={{ anyenv_common_env_file }}
-    owner={{ anyenv_user }}
-    group={{ anyenv_group }}
-    mode={{ anyenv_file_mode }}
+- name: install
+  git:
+    repo: "{{ anyenv_repo }}"
+    dest: "{{ anyenv_root }}"
+
+- name: ohmyzsh config file
+  become: true
+  template:
+    src: anyenv.zsh.j2
+    dest: "{{ anyenv_ohmyzsh_config }}"
+    owner: "{{ zsh_install_user }}"
+    group: "{{ zsh_install_group }}"
+    mode: "{{ zsh_file_mode }}"
