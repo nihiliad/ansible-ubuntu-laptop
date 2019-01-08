@@ -1,10 +1,10 @@
 ---
-- name: install ubuntu packages
+- name: install packages
   become: true
   apt:
     name: "{{ item }}"
     state: present
-  with_items:
+  loop:
     - direnv
     - git
     - powerline
@@ -101,7 +101,7 @@
   user:
     name: "{{ item }}"
     shell: /bin/zsh
-  with_items:
+  loop:
     - "{{ zsh_default_user }}"
     - root
   tags:
