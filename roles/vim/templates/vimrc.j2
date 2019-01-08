@@ -1,4 +1,7 @@
-"" NeoBundle
+"" vim-plug
+
+" Meta-note: Do we really need these first two if blocks anymore? Left over
+" from NeoBundle.
 
 " Note: Skip initialization for vim-tiny or vim-small.
 if 0 | endif
@@ -7,31 +10,21 @@ if &compatible
 set nocompatible               " Be iMproved
 endif
 
-" Required:
-set runtimepath^=~/.vim/bundle/neobundle.vim/
+if empty(glob('{{ vim_autoload_dir }}/plug.vim'))
+  silent !curl -fLo {{ vim_autoload_dir }}/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
-" Required:
-call neobundle#begin(expand('~/.vim/bundle/'))
+call plug#begin('{{ vim_plugins_dir }}')
 
-" Let NeoBundle manage NeoBundle
-" Required:
-NeoBundleFetch 'Shougo/neobundle.vim'
-
-NeoBundle 'flazz/vim-colorschemes'
-NeoBundle 'bling/vim-airline'
+Plug 'flazz/vim-colorschemes'
+Plug 'bling/vim-airline'
 " indicate the current git branch in the status line:
-NeoBundle 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
+Plug 'evidens/vim-twig', {'for': 'twig'}
 
-NeoBundleLazy 'evidens/vim-twig', {'autoload':{'filetypes':['twig']}}
-
-call neobundle#end()
-
-" Required:
-filetype plugin indent on
-
-" If there are uninstalled bundles found on startup,
-" this will conveniently prompt you to install them.
-NeoBundleCheck
+call plug#end()
 
 "" color scheme stuff
 

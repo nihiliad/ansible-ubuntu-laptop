@@ -1,0 +1,6 @@
+---
+vim_user: "{{ ansible_user_id }}"
+vim_dotvimrc: /home/{{ vim_user }}/.vimrc
+vim_dotvim_dir: /home/{{ vim_user }}/.vim
+vim_autoload_dir: "{{ vim_dotvim_dir }}/autoload"
+vim_plugins_dir: "{{ vim_dotvim_dir }}/plugged"

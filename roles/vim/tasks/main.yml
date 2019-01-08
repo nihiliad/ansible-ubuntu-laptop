@@ -1,66 +1,41 @@
 ---
-- name: install ubuntu packages
+- name: install packages
+  become: true
   apt:
     name: "{{ item }}"
     state: present
-  with_items:
+  loop:
+    - curl # for installing vim-plug
     - git
     - powerline
     - vim
   tags:
     - vim
 
-- name: vimrc
-  copy:
-    src: vimrc
-    dest: /home/{{ ansible_user }}/.vimrc
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
+- name: show vim_dotvimrc
+  debug:
+    msg: vim_dotvimrc = {{ vim_dotvimrc }}
+
+- name: directories
+  file: 
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ vim_user }}"
+    group: "{{ vim_user }}"
+    mode: 0775
+  loop:
+    - vim_dotvim_dir
+    - vim_autoload_dir
+    - vim_plugins_dir
+  tags:
+    - vim
+
+- name: .vimrc
+  template:
+    src: vimrc.j2
+    dest: "{{ vim_dotvimrc }}"
+    owner: "{{ vim_user }}"
+    group: "{{ vim_user }}"
     mode: 0664
   tags:
     - vim
-
-- name: .vim directory
-  file: 
-    path: /home/{{ ansible_user }}/.vim
-    state: directory
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
-    mode: 0775
-  tags:
-    - vim
-
-- name: NeoBundle directory
-  file: 
-    path: /home/{{ ansible_user }}/.vim/bundle
-    state: directory
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
-    mode: 0775
-  tags:
-    - vim
-    - neobundle
-
-- name: NeoBundle git clone
-  become: yes
-  become_user: "{{ ansible_user }}"
-  git:
-    repo: https://github.com/Shougo/neobundle.vim
-    dest: /home/{{ ansible_user }}/.vim/bundle/neobundle.vim
-  tags:
-    - vim
-    - neobundle
-
-#- name: NeoBundle fix git permissions
-#  file: path=/home/{{ ansible_user }}/.vim/bundle/neobundle.vim owner={{ ansible_user }} group={{ ansible_user }} state=directory recurse=yes
-#  tags:
-#    - vim
-#    - neobundle
-
-- name: NeoBundle install
-  become: yes
-  become_user: "{{ ansible_user }}"
-  shell: /home/{{ ansible_user }}/.vim/bundle/neobundle.vim/bin/neoinstall
-  tags:
-    - vim
-    - neobundle
