@@ -1,0 +1,6 @@
+env_user: "{{ ansible_user_id }}"
+env_group: "{{ env_user }}"
+env_user_home: /home/{{ env_user }}
+env_dir_mode: "2775"
+env_file_mode: "0664"
+env_exe_mode: "0775"
