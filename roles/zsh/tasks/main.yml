@@ -14,7 +14,7 @@
 
 - name: install Oh My ZSH!
   become: true
-  shell: ZSH={{ zsh_global_oh_my_zsh_root }} sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+  shell: ZSH={{ zsh_ohmyzsh_root }} sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
   tags:
     - zsh
 
@@ -22,7 +22,7 @@
   become: true
   copy:
     src: direnv.zsh
-    dest: "{{ zsh_global_oh_my_zsh_root }}/custom/direnv.sh"
+    dest: "{{ zsh_ohmyzsh_custom_dir }}/direnv.zsh"
     owner: root
     group: root
     mode: "644"
@@ -33,7 +33,7 @@
   become: true
   git:
     repo: https://github.com/bhilburn/powerlevel9k.git
-    dest: "{{ zsh_global_oh_my_zsh_root }}/custom/themes/powerlevel9k"
+    dest: "{{ zsh_ohmyzsh_themes_dir }}/powerlevel9k"
   tags:
     - zsh
 
@@ -41,57 +41,57 @@
   become: true
   git:
     repo: git://github.com/zsh-users/zsh-syntax-highlighting.git
-    dest: "{{ zsh_global_oh_my_zsh_root }}/custom/plugins/zsh-syntax-highlighting"
+    dest: "{{ zsh_ohmyzsh_plugins_dir }}/zsh-syntax-highlighting"
   tags:
     - zsh
 
-- name: global config directory
+- name: local config directory
   become: true
   file:
-    path: "{{ zsh_global_config_root }}"
+    path: "{{ zsh_local_config_root }}"
     state: directory
-    owner: root
-    group: root
-    mode: "755"
+    owner: "{{ zsh_install_user }}"
+    group: "{{ zsh_install_group }}"
+    mode: "{{ zsh_dir_mode }}"
   tags:
     - zsh
 
-- name: global zshrc
+- name: local zshrc
   become: true
   template:
-    src: global.zshrc.j2
-    dest: "{{ zsh_global_config_root }}/zshrc"
-    owner: root
-    group: root
-    mode: "644"
+    src: local.zshrc.j2
+    dest: "{{ zsh_local_zshrc }}"
+    owner: "{{ zsh_install_user }}"
+    group: "{{ zsh_install_group }}"
+    mode: "{{ zsh_file_mode }}"
   tags:
     - zsh
 
-- name: ensure global zshrc invocation
+- name: ensure local zshrc invocation
   become: true
   lineinfile:
-    dest: /etc/zsh/zshrc
-    line: "source {{ zsh_global_config_root }}/zshrc"
+    dest: "{{ zsh_system_zshrc }}"
+    line: "source {{ zsh_local_zshrc }}"
   tags:
     - zsh
 
-- name: user zshrc
+- name: default user zshrc
   copy:
     src: user.zshrc
-    dest: /home/{{ zsh_default_user }}/.zshrc
+    dest: "{{ zsh_default_user_home }}/.zshrc"
     owner: "{{ zsh_default_user }}"
-    group: "{{ zsh_default_user }}"
+    group: "{{ zsh_default_group }}"
     mode: "600"
   tags:
     - zsh
 
-- name: root zshrc
+- name: install user zshrc
   become: true
   copy:
     src: root.zshrc
-    dest: /root/.zshrc
-    owner: root
-    group: root
+    dest: "{{ zsh_install_user_home }}/.zshrc"
+    owner: "{{ zsh_install_user }}"
+    group: "{{ zsh_install_group }}"
     mode: "600"
   tags:
     - zsh
@@ -103,6 +103,6 @@
     shell: /bin/zsh
   loop:
     - "{{ zsh_default_user }}"
-    - root
+    - "{{ zsh_install_user }}"
   tags:
     - zsh
