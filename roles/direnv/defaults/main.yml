@@ -1,0 +1,9 @@
+---
+direnv_user: "{{ env_user }}"
+direnv_group: "{{ env_group }}"
+direnv_user_home: "{{ env_user_home }}"
+direnv_dir_mode: "{{ env_dir_mode }}"
+direnv_file_mode: "{{ env_file_mode }}"
+direnv_dirs2envrcs:
+  "{{ env_user_home }}/github.com": github.com.envrc
+  "{{ env_user_home }}/github.umn.edu": github.umn.edu.envrc
