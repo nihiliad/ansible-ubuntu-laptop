@@ -5,8 +5,12 @@
     name: "{{ item }}"
     state: present
   loop:
-    - build-essential
     - git
+    - build-essential
+    - libffi-dev
+    - libssl-dev 
+    - openssl
+    - zlib1g-dev
   tags:
     - anyenv
 
