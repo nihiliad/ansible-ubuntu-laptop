@@ -1,4 +1,15 @@
 ---
+- name: install packages
+  become: true
+  apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - build-essential
+    - git
+  tags:
+    - anyenv
+
 - name: directories
   file:
     state: directory
@@ -6,11 +17,15 @@
     owner: "{{ anyenv_user }}"
     group: "{{ anyenv_group }}"
     mode: "{{ anyenv_dir_mode }}"
+  tags:
+    - anyenv
 
-- name: install
+- name: install anyenv
   git:
     repo: "{{ anyenv_repo }}"
     dest: "{{ anyenv_root }}"
+  tags:
+    - anyenv
 
 - name: ohmyzsh config file
   become: true
@@ -20,3 +35,5 @@
     owner: "{{ zsh_install_user }}"
     group: "{{ zsh_install_group }}"
     mode: "{{ zsh_file_mode }}"
+  tags:
+    - anyenv
