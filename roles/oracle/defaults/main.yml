@@ -1,0 +1,12 @@
+---
+oracle_user: root
+oracle_group: root
+oracle_file_mode: "{{ env_file_mode }}"
+oracle_dir_mode: "{{ env_dir_mode }}"
+oracle_client_version: "12.2"
+oracle_home: /usr/lib/oracle/{{ oracle_client_version }}/client64
+oracle_bin: "{{ oracle_home }}/bin"
+oracle_connection_config_dir: "{{ oracle_home }}/network/admin"
+oracle_ld_library_path: "{{ oracle_home }}/lib"
+oracle_nls_lang: AMERICAN_AMERICA.UTF8
+oracle_ohmyzsh_config: "{{ zsh_ohmyzsh_custom_dir }}/oracle.zsh"

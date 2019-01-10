@@ -1,0 +1,7 @@
+export NLS_LANG={{ oracle_nls_lang }}
+export ORACLE_HOME={{ oracle_home }}
+typeset -xT LD_LIBRARY_PATH ld_library_path
+typeset -U ld_library_path
+ld_library_path=({{ oracle_ld_library_path }} $ld_library_path)
+typeset -U path
+path=({{ oracle_bin }} $path)

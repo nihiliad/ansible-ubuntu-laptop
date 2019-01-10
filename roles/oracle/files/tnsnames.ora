@@ -1,0 +1,21 @@
+hotelprd.oit =
+(DESCRIPTION =
+  (ADDRESS = (PROTOCOL = TCP)(HOST = oracle-hotel-prd.oit.umn.edu)(PORT = 1521))
+  (CONNECT_DATA =
+    (SERVICE_NAME = hotelprd.oit)
+  )
+)
+hoteltst.oit =
+(DESCRIPTION =
+  (ADDRESS = (PROTOCOL = TCP)(HOST = oracle-hotel-tst.oit.umn.edu)(PORT = 1521))
+  (CONNECT_DATA =
+    (SERVICE_NAME = hoteltst.oit)
+  )
+)
+dweprd.oit =
+(DESCRIPTION =
+  (ADDRESS = (PROTOCOL = TCP)(HOST = dm01-scan.oit.umn.edu)(PORT = 1521))
+  (CONNECT_DATA =
+    (SERVICE_NAME = dweprd.oit)
+  )
+)

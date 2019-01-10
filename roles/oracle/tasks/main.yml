@@ -1,0 +1,47 @@
+---
+- name: install packages
+  become: true
+  apt:
+    pkg: "{{ item }}"
+    state: present
+  loop:
+    - build-essential # Needed to build client libraries for programming languages.
+    - libaio1
+  tags:
+    - oracle
+
+- name: connection config dir
+  become: true
+  file:
+    path: "{{ oracle_connection_config_dir }}"
+    state: directory
+    owner: "{{ oracle_user }}"
+    group: "{{ oracle_group }}"
+    mode: "{{ oracle_dir_mode }}"
+  tags:
+    - oracle
+
+- name: connection config files
+  become: true
+  copy:
+    src: "{{ item }}"
+    dest: "{{ oracle_connection_config_dir }}/{{ item }}"
+    owner: "{{ oracle_user }}"
+    group: "{{ oracle_group }}"
+    mode: "{{ oracle_file_mode }}"
+  loop:
+    - sqlnet.ora
+    - tnsnames.ora
+  tags:
+    - oracle
+
+- name: ohmyzsh config file
+  become: true
+  template:
+    src: oracle.zsh.j2
+    dest: "{{ oracle_ohmyzsh_config }}"
+    owner: "{{ zsh_install_user }}"
+    group: "{{ zsh_install_group }}"
+    mode: "{{ zsh_file_mode }}"
+  tags:
+    - oracle
