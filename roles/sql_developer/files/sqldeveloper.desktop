@@ -1,0 +1,8 @@
+[Desktop Entry]
+Exec=sqldeveloper
+Terminal=false
+StartupNotify=true
+Categories=GNOME;Oracle;
+Type=Application
+Icon=/opt/sqldeveloper/icon.png
+Name=Oracle SQL Developer
