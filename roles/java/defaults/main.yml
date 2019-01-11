@@ -1,0 +1,8 @@
+---
+java_packages:
+  - openjdk-8-jdk
+  - openjdk-8-jre
+  - icedtea-8-plugin
+java_home: /usr/lib/jvm/java-8-openjdk-amd64
+java_alternative_path: /usr/lib/jvm/java-1.8.0-openjdk-amd64
+java_ohmyzsh_config: "{{ zsh_ohmyzsh_custom_dir }}/java.zsh"

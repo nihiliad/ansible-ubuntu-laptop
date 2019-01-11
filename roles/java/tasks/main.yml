@@ -1,0 +1,25 @@
+---
+- name: install packages
+  become: true
+  apt:
+    name: "{{ java_packages }}"
+    state: present
+  tags:
+    - java
+
+- name: update alternatives
+  become: true
+  command: update-java-alternatives --set {{ java_alternative_path }}
+  tags:
+    - java
+
+- name: ohmyzsh config file
+  become: true
+  template:
+    src: java.zsh.j2
+    dest: "{{ java_ohmyzsh_config }}"
+    owner: "{{ zsh_install_user }}"
+    group: "{{ zsh_install_group }}"
+    mode: "{{ zsh_file_mode }}"
+  tags:
+    - java
