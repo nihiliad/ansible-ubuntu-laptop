@@ -34,7 +34,7 @@ where `$version` is your database/client version, e.g., 12.2:
 
 After executing this role:
 
-* `sqlplus $username@$service_name`, e.g., `sqlplus expert@hoteltst.oit`
+* `sqlplus $username@$service_name`, e.g., `sqlplus $username@hoteltst.oit`
 
 ## Role Variables
 
