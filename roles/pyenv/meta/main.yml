@@ -1,0 +1,21 @@
+---
+galaxy_info:
+  author: David Naughton
+  description: Installation and setup of pyenv.
+  # Some suggested licenses:
+  # - BSD (default)
+  # - MIT
+  # - GPLv2
+  # - GPLv3
+  # - Apache
+  # - CC-BY
+  #license: license (GPLv2, CC-BY, etc)
+  min_ansible_version: 2.7.5
+  platforms:
+  - name: Ubuntu
+    versions:
+    - all
+dependencies:
+  - role: anyenv
+  - role: env
+  - role: zsh

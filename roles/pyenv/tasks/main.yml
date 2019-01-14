@@ -1,0 +1,16 @@
+---
+- name: install
+  shell: anyenv install pyenv
+  args:
+    executable: /usr/bin/zsh
+    creates: "{{ pyenv_env_dir }}"
+  tags:
+    - pyenv
+
+- name: install build dependencies
+  become: true
+  apt:
+    name: "{{ pyenv_builddep_package }}"
+    state: build-dep
+  tags:
+    - pyenv

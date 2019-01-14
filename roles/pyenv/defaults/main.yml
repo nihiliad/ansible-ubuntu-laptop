@@ -1,0 +1,10 @@
+#anyenv_repo: https://github.com/riywo/anyenv
+#anyenv_dir_mode: "{{ env_dir_mode }}"
+#anyenv_file_mode: "{{ env_file_mode }}"
+pyenv_user: "{{ anyenv_user }}"
+pyenv_env_dir: "{{ anyenv_envs_dir }}/pyenv"
+pyenv_builddep_package: python3.7
+#anyenv_group: "{{ env_group }}"
+#anyenv_root: "{{ env_user_home }}/.anyenv"
+#anyenv_bin: "{{ anyenv_root }}/bin"
+#anyenv_ohmyzsh_config: "{{ zsh_ohmyzsh_custom_dir }}/anyenv.zsh"
