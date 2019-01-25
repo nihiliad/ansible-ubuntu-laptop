@@ -1,0 +1,3 @@
+boxes_user: "{{ env_user }}"
+boxes_packages:
+  - gnome-boxes

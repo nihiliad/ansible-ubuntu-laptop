@@ -1,0 +1,20 @@
+---
+- name: install packages
+  become: true
+  apt:
+    name: "{{ boxes_packages }}"
+
+# The following steps may be necessary only for Ubuntu 18.04. They will require a reboot.    
+
+- name: add kvm group to qemu config
+  become: true
+  lineinfile:
+    path: /etc/modprobe.d/qemu-system-x86.conf
+    line: group=kvm
+
+- name: add kvm group to user's groups
+  become: true
+  user:
+   name: "{{ boxes_user }}"
+   groups: kvm
+   append: yes
