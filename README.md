@@ -1,56 +1,53 @@
 # ansible-ubuntu-laptop
 
-Set up an Ubuntu laptop with Ansible.
+Use Ansible to install and configure software on a laptop running Ubuntu.
 
-## DConf/GSettings
+## Quick Start
 
-To make DConf changes, we manually install these third-party Ansible modules into `library/`:
+### Install Ansible
 
-* [ansible-dconf](https://github.com/jistr/ansible-dconf)
-* [ansible-gsetting](https://github.com/jistr/ansible-gsetting)
-
-See the documentation at the links above for installation instructions.
-
-## Testing with Vagrant
-
-### vagrant provision
-
-The `Vagrantfile` includes code to call `ansible-playbook` with `playbook.yml` when
-executing `vagrant provision`.
-
-### ANSIBLE_ARGS
-
-We can pass arguments to `ansible-playbook` with the
-`ANSIBLE_ARGS` environment variable. For example:
-
-```bashrc
-ANSIBLE_ARGS='--tags=vim' vagrant provision
+```
+sudo apt update
+sudo apt install software-properties-common
+sudo apt-add-repository --yes --update ppa:ansible/ansible
+sudo apt install ansible
 ```
 
-### vagrant snapshot
+### Clone this Repo
 
-__Note__: The following `vagrant snapshot` commands require Vagrant >= 1.8. See the
-[Vagrant snapshot docs](https://www.vagrantup.com/docs/cli/snapshot.html) for more info.
-
-```bashrc
-vagrant up --no-provision
-vagrant snapshot push
-vagrant provision
+```
+git clone git@github.com:nihiliad/ansible-ubuntu-laptop.git
 ```
 
-If necessary, improve Ansible code and iterate:
+### Run
 
-```bashrc
-vagrant snapshot pop --no-provision
-vagrant snapshot push
-vagrant up --no-provision
-vagrant provision
+```
+cd ansible-ubuntu-laptop
+ansible-playbook --ask-become-pass local.yml
 ```
 
-Even more control via named snapshots:
+## Testing with GNOME Boxes
 
-```bashrc
-vagrant snapshot save snapshot-name
-vagrant provision
-vagrant snapshot restore snapshot-name --no-provision
+### Host OS
+
+Run the `boxes` role in this repo to install and configure Boxes:
+
 ```
+ansible-playbook --ask-become-pass --tags "boxes" local.yml
+```
+
+### Guest OS
+
+Install packages to allow running the code in this repo via a shared folder:
+
+```
+sudo apt install spice-vdagent spice-webdavd
+```
+
+Share this repository folder in the guest. The location should be something like...
+
+```
+/run/user/1000/gvfs/dav+sd\:host\=Spice%2520client%2520folder._webdav._tcp.local/
+```
+
+Then [install Ansible](#install-ansible) and [run](#run). Helps to take snapshots of intermediate states, test, restore, and iterate.
