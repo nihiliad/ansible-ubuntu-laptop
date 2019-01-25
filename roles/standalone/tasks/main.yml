@@ -1,0 +1,7 @@
+---
+- name: install packages
+  become: true
+  apt:
+    name: "{{ standalone_packages }}"
+  tags:
+    - standalone

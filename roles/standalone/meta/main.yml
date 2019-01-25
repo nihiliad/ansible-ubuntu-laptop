@@ -1,0 +1,18 @@
+---
+galaxy_info:
+  author: David Naughton
+  description: Installs packages that do not depend on using a PPA and require no config. No roles depend on them.
+  # Some suggested licenses:
+  # - BSD (default)
+  # - MIT
+  # - GPLv2
+  # - GPLv3
+  # - Apache
+  # - CC-BY
+  #license: license (GPLv2, CC-BY, etc)
+  min_ansible_version: 2.7.5
+  platforms:
+  - name: GenericLinux
+    versions:
+    - all
+dependencies:

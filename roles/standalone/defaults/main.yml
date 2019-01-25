@@ -1,0 +1,7 @@
+---
+standalone_packages:
+  - ack-grep
+  - chromium-browser
+  - nautilus-dropbox
+  - network-manager-vpnc-gnome # TODO: Automate configuration?
+  - tree
