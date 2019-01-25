@@ -3,6 +3,8 @@
   become: true
   apt:
     name: "{{ boxes_packages }}"
+  tags:
+    - boxes
 
 # The following steps may be necessary only for Ubuntu 18.04. They will require a reboot.    
 
@@ -11,6 +13,8 @@
   lineinfile:
     path: /etc/modprobe.d/qemu-system-x86.conf
     line: group=kvm
+  tags:
+    - boxes
 
 - name: add kvm group to user's groups
   become: true
@@ -18,3 +22,5 @@
    name: "{{ boxes_user }}"
    groups: kvm
    append: yes
+  tags:
+    - boxes
