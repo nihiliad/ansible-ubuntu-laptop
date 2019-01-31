@@ -1,10 +1,22 @@
 ---
+- name: apt key
+  become: true
+  apt_key:
+    url: "{{ atom_base_url }}/gpgkey"
+  tags:
+    - atom
+
 - name: apt repository
-  apt_repository: repo='ppa:webupd8team/atom'
+  become: true
+  apt_repository:
+    repo: deb [arch=amd64] {{ atom_base_url }}/any/ any main
+    filename: atom
   tags:
     - atom
 
 - name: install
-  apt: name=atom state=present update_cache=yes
+  become: true
+  apt:
+    name: atom
   tags:
     - atom
