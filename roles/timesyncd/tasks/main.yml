@@ -1,0 +1,12 @@
+---
+- name: enable ntp sync
+  become: true
+  command: timedatectl set-ntp true
+  tags:
+    - timesyncd
+
+- name: restart
+  become: true
+  command: systemctl restart systemd-timesyncd.service
+  tags:
+    - timesyncd
