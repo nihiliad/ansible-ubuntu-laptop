@@ -50,4 +50,6 @@ Share this repository folder in the guest. The location should be something like
 /run/user/1000/gvfs/dav+sd\:host\=Spice%2520client%2520folder._webdav._tcp.local/
 ```
 
+In Nautilus, click on '+Other Locations'. That will start a search, which will discover the 'Spice client folder'. Click on that to share this folder.
+
 Then [install Ansible](#install-ansible) and [run](#run). Helps to take snapshots of intermediate states, test, restore, and iterate.
