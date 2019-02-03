@@ -1,0 +1,25 @@
+---
+
+# Instructions from: https://spideroak.support/hc/en-us/articles/115001893103
+
+- name: apt key
+  become: true
+  apt_key:
+    url: https://spideroak.com/dist/spideroak-apt-2016.asc
+  tags:
+    - spideroak
+
+- name: apt repository
+  become: true
+  apt_repository:
+    repo: deb http://apt.spideroak.com/ubuntu-spideroak-hardy/ release restricted
+    filename: spideroak
+  tags:
+    - spideroak
+
+- name: install
+  become: true
+  apt:
+    name: spideroakone
+  tags:
+    - spideroak
