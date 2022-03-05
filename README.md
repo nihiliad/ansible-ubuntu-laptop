@@ -30,21 +30,38 @@ ansible-playbook --ask-become-pass local.yml
 
 ### Host OS
 
+
+#### Install Boxes
+
 Run the `boxes` role in this repo to install and configure Boxes:
 
 ```
 ansible-playbook --ask-become-pass --tags "boxes" local.yml
 ```
 
+#### Create a new vritual machine
+
+Run Boxes and create a new virtual machine, probably by choosing "Operating System Image
+File" under "Select an OS Source", to use a previously downloaded ISO file. Accept the
+defaults, then Boxes will start a new virtual machine, running the installer for the
+[Guest OS](#guest-os).
+
 ### Guest OS
 
-*Waring!* When installing the guest OS, do _not_ encrypt the drive. This has made several virtal
+#### Install the guest OS
+
+Follow the prompts in the installer.
+
+**Waring!** Do _not_ encrypt the drive for the host OS! This has made several virtual
 machines, including Pop!_OS 20.04 and 21.10, impossible to shut down and restart with Boxes.
 
-Install packages to allow running the code in this repo via a shared folder:
+#### Share this repo folder in the guest OS
+
+Install packages to allow running the code in this repo via a shared folder, then reboot:
 
 ```
 sudo apt install spice-vdagent spice-webdavd
+sudo shutdown -r now
 ```
 
 Share this repository folder in the guest. The location should be something like...
