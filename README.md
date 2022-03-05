@@ -38,6 +38,9 @@ ansible-playbook --ask-become-pass --tags "boxes" local.yml
 
 ### Guest OS
 
+*Waring!* When installing the guest OS, do _not_ encrypt the drive. This has made several virtal
+machines, including Pop!_OS 20.04 and 21.10, impossible to shut down and restart with Boxes.
+
 Install packages to allow running the code in this repo via a shared folder:
 
 ```
