@@ -57,6 +57,11 @@ machines, including Pop!_OS 20.04 and 21.10, impossible to shut down and restart
 
 #### Share this repo folder in the guest OS
 
+Open Files (Nautilus), and select "+ Other Locations". Under "Networks", there should be
+no "Spice client folder":
+
+![Files (Nautilus) before folder sharing](files-before-spice.png) 
+
 Install packages to allow running the code in this repo via a shared folder, then reboot:
 
 ```
@@ -64,12 +69,32 @@ sudo apt install spice-vdagent spice-webdavd
 sudo shutdown -r now
 ```
 
-Share this repository folder in the guest. The location should be something like...
+Again open Files (Nautilus), and select "+ Other Locations". Under "Networks", now there
+should be a "Spice client folder":
+
+![Files (Nautilus) after installing SPICE tools](files-after-spice.png) 
+
+In the Boxes menu, go to the "Properties" for this virtual machine, and select the
+"Devices & Shares" tab. Under "Folder Shares", click "+" to add a new share. In the form
+that pops up, navigate to this "Local Folder" on the host OS, click "Open", give the
+folder a "Name" on the guest OS, then click "Save". 
+
+Back in Files, click "Spice client folder". Another "Spice client folder" item should
+appear above it, with a file folder icon next to it:
+
+![Files (Nautilus) after sharing](files-after-share.png) 
+
+Click on the new item, which should display a folder icon with the name that you assigned
+to the shared folder on the guest OS. Right click on that folder, and choose "Open in
+Terminal". That should open a Terminal window for this repository's folder. The parent path
+should be something like:
 
 ```
 /run/user/1000/gvfs/dav+sd\:host\=Spice%2520client%2520folder._webdav._tcp.local/
 ```
 
-In Nautilus, click on '+Other Locations'. That will start a search, which will discover the 'Spice client folder'. Click on that to share this folder.
+#### Test this code!
 
-Then [install Ansible](#install-ansible) and [run](#run). Helps to take snapshots of intermediate states, test, restore, and iterate.
+[Install Ansible](#install-ansible) and [run](#run). Helps to take snapshots of intermediate
+states, test, restore, and iterate. Note that Boxes doesn't seem to allow naming snapshots
+until after they are created.
