@@ -6,6 +6,9 @@ Use Ansible to install and configure software on a laptop running Ubuntu.
 
 ### Install Ansible
 
+Instructions from the official Ansible docs for
+[installing on Ubuntu](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#installing-ansible-on-ubuntu):
+
 ```
 sudo apt update
 sudo apt install software-properties-common
