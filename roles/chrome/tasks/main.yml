@@ -1,22 +1,18 @@
 ---
-- name: apt key
+- name: google chrome
+  block:
+    - name: apt key
+      apt_key:
+        url: https://dl.google.com/linux/linux_signing_key.pub
+    
+    - name: apt repository
+      apt_repository:
+        repo: deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main
+        filename: google-chrome
+    
+    - name: install
+      apt:
+        name: google-chrome-stable
   become: true
-  apt_key:
-    url: https://dl.google.com/linux/linux_signing_key.pub
-  tags:
-    - chrome
-
-- name: apt repository
-  become: true
-  apt_repository:
-    repo: deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main
-    filename: google-chrome
-  tags:
-    - chrome
-
-- name: install
-  become: true
-  apt:
-    name: google-chrome-stable
   tags:
     - chrome
