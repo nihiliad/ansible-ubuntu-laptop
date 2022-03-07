@@ -1,0 +1,8 @@
+---
+fonts_install_dir: "{{ ansible_user_dir }}/.local/share/fonts"
+fonts_meslo_base_url: https://github.com/romkatv/powerlevel10k-media/raw/master
+fonts_meslo_font_files:
+  - "{{ fonts_meslo_base_url }}/MesloLGS%20NF%20Regular.ttf"
+  - "{{ fonts_meslo_base_url }}/MesloLGS%20NF%20Bold.ttf"
+  - "{{ fonts_meslo_base_url }}/MesloLGS%20NF%20Italic.ttf"
+  - "{{ fonts_meslo_base_url }}/MesloLGS%20NF%20Bold%20Italic.ttf"

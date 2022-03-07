@@ -1,0 +1,24 @@
+---
+- name: fonts
+  block:
+    - name: install powerline
+      become: true
+      apt:
+        name: powerline
+
+    - name: create fonts install dir
+      ansible.builtin.file:
+        path: "{{ fonts_install_dir }}"
+        state: directory
+        mode: '0755'
+
+    - name: install Meslo nerd font
+      get_url:
+        url: "{{ item }}"
+        dest: "{{ fonts_install_dir }}"
+      loop: "{{ fonts_meslo_font_files }}"
+
+    - name: update font cache
+      shell: fc-cache -f -v
+  tags:
+    - fonts
