@@ -1,17 +1,6 @@
 ---
-zsh_default_user: "{{ env_user }}"
-zsh_default_group: "{{ env_group }}"
-zsh_default_user_home: "{{ env_user_home }}"
-zsh_install_user: root
-zsh_install_group: "{{ zsh_install_user }}"
-zsh_install_user_home: /{{ zsh_install_user }}
-zsh_dir_mode: "{{ env_dir_mode }}"
-zsh_file_mode: "{{ env_file_mode }}"
-zsh_local_config_root: /usr/local/etc/zsh
-zsh_local_zshrc: "{{ zsh_local_config_root }}/zshrc"
-zsh_system_config_root: /etc/zsh
-zsh_system_zshrc: "{{ zsh_system_config_root }}/zshrc"
-zsh_ohmyzsh_root: /usr/local/bin/ohmyzsh
+zsh_default_user: "{{ ansible_user_id }}"
+zsh_ohmyzsh_root: "{{ ansible_user_dir }}/.oh-my-zsh"
 zsh_ohmyzsh_custom_dir: "{{ zsh_ohmyzsh_root }}/custom"
 zsh_ohmyzsh_plugins_dir: "{{ zsh_ohmyzsh_custom_dir }}/plugins"
 zsh_ohmyzsh_themes_dir: "{{ zsh_ohmyzsh_custom_dir }}/themes"

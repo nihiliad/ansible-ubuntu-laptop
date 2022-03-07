@@ -1,96 +1,51 @@
 ---
-- name: install packages
+- name: zsh
+  block:
+    - name: install zsh
+      apt:
+        name: zsh
+    
+    - name: set default shell
+      user:
+        name: "{{ zsh_default_user }}"
+        shell: /bin/zsh
   become: true
-  apt:
-    name: "{{ item }}"
-    state: present
-  loop:
-    - git
-    - powerline
-    - zsh
   tags:
     - zsh
 
-- name: install Oh My ZSH!
-  become: true
-  shell: ZSH={{ zsh_ohmyzsh_root }} sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
-  tags:
-    - zsh
+- name: Oh My Zsh!
+  block:
+    - name: oh-my-zsh installed?
+      stat: path={{ zsh_ohmyzsh_root }}
+      register: ohmyzsh_root
+      changed_when: False
 
-- name: install powerlevel9k theme
-  become: true
-  git:
-    repo: https://github.com/bhilburn/powerlevel9k.git
-    dest: "{{ zsh_ohmyzsh_themes_dir }}/powerlevel9k"
-  tags:
-    - zsh
+    - name: install oh-my-zsh
+      shell: ZSH={{ zsh_ohmyzsh_root }} sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)" "" --unattended
+      when: not ohmyzsh_root.stat.exists
+    
+    - name: install powerlevel10k theme
+      git:
+        repo: https://github.com/romkatv/powerlevel10k.git
+        dest: "{{ zsh_ohmyzsh_themes_dir }}/powerlevel10k"
+    
+    - name: install syntax highlighting plugin
+      git:
+        repo: https://github.com/zsh-users/zsh-syntax-highlighting.git
+        dest: "{{ zsh_ohmyzsh_plugins_dir }}/zsh-syntax-highlighting"
+    
+    - name: install autosuggestions plugin
+      git:
+        repo: https://github.com/zsh-users/zsh-autosuggestions.git
+        dest: "{{ zsh_ohmyzsh_plugins_dir }}/zsh-autosuggestions"
 
-- name: install syntax highlighting plugin
-  become: true
-  git:
-    repo: git://github.com/zsh-users/zsh-syntax-highlighting.git
-    dest: "{{ zsh_ohmyzsh_plugins_dir }}/zsh-syntax-highlighting"
+    - name: install user config files
+      copy:
+        src: "{{ item }}"
+        dest: "{{ ansible_user_dir }}/{{ item }}"
+      loop:
+          - .zshrc
+          - .p10k.zsh
   tags:
-    - zsh
-
-- name: local config directory
-  become: true
-  file:
-    path: "{{ zsh_local_config_root }}"
-    state: directory
-    owner: "{{ zsh_install_user }}"
-    group: "{{ zsh_install_group }}"
-    mode: "{{ zsh_dir_mode }}"
-  tags:
-    - zsh
-
-- name: local zshrc
-  become: true
-  template:
-    src: local.zshrc.j2
-    dest: "{{ zsh_local_zshrc }}"
-    owner: "{{ zsh_install_user }}"
-    group: "{{ zsh_install_group }}"
-    mode: "{{ zsh_file_mode }}"
-  tags:
-    - zsh
-
-- name: ensure local zshrc invocation
-  become: true
-  lineinfile:
-    dest: "{{ zsh_system_zshrc }}"
-    line: "source {{ zsh_local_zshrc }}"
-  tags:
-    - zsh
-
-- name: default user zshrc
-  copy:
-    src: user.zshrc
-    dest: "{{ zsh_default_user_home }}/.zshrc"
-    owner: "{{ zsh_default_user }}"
-    group: "{{ zsh_default_group }}"
-    mode: "600"
-  tags:
-    - zsh
-
-- name: install user zshrc
-  become: true
-  copy:
-    src: root.zshrc
-    dest: "{{ zsh_install_user_home }}/.zshrc"
-    owner: "{{ zsh_install_user }}"
-    group: "{{ zsh_install_group }}"
-    mode: "600"
-  tags:
-    - zsh
-
-- name: change login shells
-  become: true
-  user:
-    name: "{{ item }}"
-    shell: /bin/zsh
-  loop:
-    - "{{ zsh_default_user }}"
-    - "{{ zsh_install_user }}"
-  tags:
+    - ohmyzsh
     - zsh
