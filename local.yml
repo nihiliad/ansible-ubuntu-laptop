@@ -1,17 +1,8 @@
 ---
-- hosts: all
-  become: true
-  vars:
-    ansible_user: vagrant
+- hosts: 127.0.0.1
+  connection: local
   roles:
-    - atom
-    - backintime
-    - bluetooth
-    - dconf_dependencies
-    - gnome_shell_extensions
-    - materia_theme
-    - paper_theme
-    - tilix
-    - vim
+    - standalone
+    - chrome
+    - fonts
     - zsh
-    - standalone-packages

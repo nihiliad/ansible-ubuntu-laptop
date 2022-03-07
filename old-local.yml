@@ -1,0 +1,17 @@
+---
+- hosts: all
+  become: true
+  vars:
+    ansible_user: vagrant
+  roles:
+    - atom
+    - backintime
+    - bluetooth
+    - dconf_dependencies
+    - gnome_shell_extensions
+    - materia_theme
+    - paper_theme
+    - tilix
+    - vim
+    - zsh
+    - standalone-packages
