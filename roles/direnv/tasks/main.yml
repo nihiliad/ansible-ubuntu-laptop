@@ -1,44 +1,27 @@
 ---
-- name: install packages
-  become: true
-  apt:
-    name: "{{ item }}"
-    state: present
-  loop:
-    - direnv
-    - git
-  tags:
-    - direnv
-
-- name: direnv zsh hook
-  become: true
-  copy:
-    src: direnv.zsh
-    dest: "{{ zsh_ohmyzsh_custom_dir }}/direnv.zsh"
-    owner: "{{ zsh_install_user }}"
-    group: "{{ zsh_install_group }}"
-    mode: "{{ zsh_file_mode }}"
-  tags:
-    - direnv
-
-- name: directories
-  file:
-    path: "{{ item.key }}"
-    state: directory
-    owner: "{{ direnv_user }}"
-    group: "{{ direnv_group }}"
-    mode: "{{ direnv_dir_mode }}"
-  loop: "{{ direnv_dirs2envrcs|dict2items }}"
-  tags:
-    - direnv
-
-- name: envrcs
-  copy:
-    src: "{{ item.value }}"
-    dest: "{{ item.key }}/.envrc"
-    owner: "{{ direnv_user }}"
-    group: "{{ direnv_group }}"
-    mode: "{{ direnv_file_mode }}"
-  loop: "{{ direnv_dirs2envrcs|dict2items }}"
+- name: direnv
+  block:
+    - name: install
+      become: true
+      apt:
+        name: direnv
+    
+    - name: direnv zsh hook
+      become: true
+      copy:
+        src: direnv.zsh
+        dest: "{{ zsh_ohmyzsh_custom_dir }}/direnv.zsh"
+    
+    - name: directories
+      file:
+        path: "{{ item.key }}"
+        state: directory
+      loop: "{{ direnv_dirs2envrcs|dict2items }}"
+    
+    - name: envrcs
+      copy:
+        src: "{{ item.value }}"
+        dest: "{{ item.key }}/.envrc"
+      loop: "{{ direnv_dirs2envrcs|dict2items }}"
   tags:
     - direnv
