@@ -33,7 +33,7 @@
         dest: "{{ anyenv_ohmyzsh_config }}"
     
     - name: install envs
-      ansible.builtin.shell: anyenv install {{ item }}
+      ansible.builtin.shell: "{{ anyenv_exe }} install {{ item }}"
       args:
         executable: /bin/zsh
       loop: "{{ anyenv_envs }}"
