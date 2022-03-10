@@ -33,21 +33,18 @@ ansible-playbook --ask-become-pass local.yml
 
 ### Host OS
 
-
 #### Install Boxes
 
-Run the `boxes` role in this repo to install and configure Boxes:
-
 ```
-ansible-playbook --ask-become-pass --tags "boxes" local.yml
+apt install gnome-boxes
 ```
 
 #### Create a new vritual machine
 
 Run Boxes and create a new virtual machine, probably by choosing "Operating System Image
 File" under "Select an OS Source", to use a previously downloaded ISO file. Accept the
-defaults, then Boxes will start a new virtual machine, running the installer for the
-[Guest OS](#guest-os).
+defaults (but maybe increase the memory), then Boxes will start a new virtual machine,
+running the installer for the [Guest OS](#guest-os).
 
 ### Guest OS
 
@@ -96,8 +93,18 @@ should be something like:
 /run/user/1000/gvfs/dav+sd\:host\=Spice%2520client%2520folder._webdav._tcp.local/
 ```
 
+#### Install credentials for GitHub
+
+Copy credentials, probably public-private keys, for GitHub, from the host OS to the guest OS.
+
+#### Remove the shared folder
+
+The shared folder seems to cause Boxes to slow way down and eventually lock up. Remove it as
+soon as possible after GitHub credentials are installed.
+
 #### Test this code!
 
-[Install Ansible](#install-ansible) and [run](#run). Helps to take snapshots of intermediate
-states, test, restore, and iterate. Note that Boxes doesn't seem to allow naming snapshots
+Follow the [Quick Start](#quick-start) procedure in the guest OS, and do all work there.
+Helps to take snapshots of intermediate states, test, restore, and iterate. Note that Boxes
+doesn't seem to allow naming snapshots
 until after they are created.
