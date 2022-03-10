@@ -1,0 +1,7 @@
+---
+- name: install
+  apt:
+    deb: https://umn.zoom.us/client/latest/zoom_amd64.deb
+  become: true
+  tags:
+    - zoom
