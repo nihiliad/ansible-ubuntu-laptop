@@ -6,3 +6,6 @@
     - chrome
     - fonts
     - zsh
+    - direnv
+    - zoom
+    - anyenv
