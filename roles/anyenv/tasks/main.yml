@@ -1,43 +1,41 @@
 ---
-- name: install packages
-  become: true
-  apt:
-    name: "{{ item }}"
-    state: present
-  loop:
-    - git
-    - build-essential
-    - libffi-dev
-    - libssl-dev 
-    - openssl
-    - zlib1g-dev
-  tags:
-    - anyenv
+- name: anyenv
+  block:
+    - name: install dependencies
+      become: true
+      apt:
+        name: "{{ anyenv_dependencies }}"
+    
+    - name: anyenv root
+      file:
+        state: directory
+        path: "{{ anyenv_root }}"
+    
+    - name: install
+      git:
+        repo: "{{ anyenv_repo }}"
+        dest: "{{ anyenv_root }}"
+    
+    - name: initialize install manifest
+      git:
+        repo: "{{ anyenv_install_repo }}"
+        dest: "{{ anyenv_install_manifest_dir }}"
+    
+    - name: initialize anyenv
+      ansible.builtin.shell: "{{ anyenv_exe }} init"
+      args:
+        executable: /bin/zsh
 
-- name: directories
-  file:
-    state: directory
-    path: "{{ anyenv_root }}"
-    owner: "{{ anyenv_user }}"
-    group: "{{ anyenv_group }}"
-    mode: "{{ anyenv_dir_mode }}"
-  tags:
-    - anyenv
-
-- name: install anyenv
-  git:
-    repo: "{{ anyenv_repo }}"
-    dest: "{{ anyenv_root }}"
-  tags:
-    - anyenv
-
-- name: ohmyzsh config file
-  become: true
-  template:
-    src: anyenv.zsh.j2
-    dest: "{{ anyenv_ohmyzsh_config }}"
-    owner: "{{ zsh_install_user }}"
-    group: "{{ zsh_install_group }}"
-    mode: "{{ zsh_file_mode }}"
+    - name: ohmyzsh config file
+      become: true
+      template:
+        src: anyenv.zsh.j2
+        dest: "{{ anyenv_ohmyzsh_config }}"
+    
+    - name: install envs
+      ansible.builtin.shell: anyenv install {{ item }}
+      args:
+        executable: /bin/zsh
+      loop: "{{ anyenv_envs }}"
   tags:
     - anyenv

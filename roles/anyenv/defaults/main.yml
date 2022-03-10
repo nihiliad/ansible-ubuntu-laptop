@@ -1,9 +1,20 @@
-anyenv_repo: https://github.com/riywo/anyenv
-anyenv_dir_mode: "{{ env_dir_mode }}"
-anyenv_file_mode: "{{ env_file_mode }}"
-anyenv_user: "{{ env_user }}"
-anyenv_group: "{{ env_group }}"
-anyenv_root: "{{ env_user_home }}/.anyenv"
+anyenv_repo: https://github.com/anyenv/anyenv
+anyenv_install_repo: https://github.com/anyenv/anyenv-install
+anyenv_root: "{{ ansible_user_dir }}/.anyenv"
+anyenv_config_root: "{{ ansible_user_dir }}/.config/anyenv"
+anyenv_install_manifest_dir: "{{ anyenv_config_root }}/anyenv-install"
 anyenv_bin: "{{ anyenv_root }}/bin"
+anyenv_exe: "{{ anyenv_bin }}/anyenv"
 anyenv_envs_dir: "{{ anyenv_root }}/envs"
 anyenv_ohmyzsh_config: "{{ zsh_ohmyzsh_custom_dir }}/anyenv.zsh"
+anyenv_dependencies:
+  - git
+  - build-essential
+  - libffi-dev
+  - libssl-dev 
+  - openssl
+  - zlib1g-dev
+anyenv_envs:
+  - nodenv
+  - pyenv
+  - rbenv
