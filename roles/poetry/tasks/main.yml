@@ -18,7 +18,7 @@
 
     - name: configure poetry to use in-project venvs
       command: "{{ poetry_exe }} config virtualenvs.in-project true"
-      when: poetry_config.stdout == 'false'
+      when: poetry_config.stdout != 'true'
     
     - name: ohmyzsh config file
       become: true
