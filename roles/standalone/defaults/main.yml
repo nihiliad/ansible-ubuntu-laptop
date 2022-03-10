@@ -4,3 +4,4 @@ standalone_packages:
   - gnome-tweaks
 #  - network-manager-vpnc-gnome # TODO: Automate configuration?
   - tree
+  - xz-utils 
