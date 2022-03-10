@@ -22,7 +22,7 @@
         dest: "{{ anyenv_install_manifest_dir }}"
     
     - name: initialize anyenv
-      ansible.builtin.shell: "{{ anyenv_exe }} init"
+      ansible.builtin.shell: eval "$({{ anyenv_exe }} init -)"
       args:
         executable: /bin/zsh
 
