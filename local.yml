@@ -10,4 +10,6 @@
     - zoom
     - anyenv
     - poetry
-#    - { role: slack, slack_version: '4.23.0' }
+    - { role: instantclient,
+        instantclient_rpm_url: https://download.oracle.com/otn_software/linux/instantclient/215000/oracle-instantclient-basic-21.5.0.0.0-1.el8.x86_64.rpm
+      }

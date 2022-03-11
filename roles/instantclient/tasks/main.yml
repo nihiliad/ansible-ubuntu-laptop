@@ -1,0 +1,25 @@
+---
+- name: instantclient
+  block:
+    - name: install dependencies
+      apt:
+        name: "{{ instantclient_dependencies }}"
+
+    - name: ensure root dir exists
+      file:
+        path: "{{ instantclient_root }}"
+        state: directory
+
+    - name: download rpm
+      get_url:
+        url: "{{ instantclient_rpm_url }}"
+        dest: "{{ instantclient_root }}"
+    
+    - name: convert rpm to deb
+      ansible.builtin.shell: alien -i *instantclient*.rpm
+      args:
+        executable: /bin/zsh
+        chdir: "{{ instantclient_root }}"
+  become: true
+  tags:
+    - instantclient
