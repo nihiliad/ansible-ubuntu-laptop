@@ -1,0 +1,29 @@
+---
+- name: poetry
+  block:
+    - name: install dependencies
+      become: true
+      apt:
+        name: "{{ poetry_dependencies }}"
+    
+    - name: install
+      ansible.builtin.shell: curl -sSL https://install.python-poetry.org | python3 -
+      args:
+        executable: /bin/zsh
+
+    - name: get poetry in-project-venvs config
+      command: "{{ poetry_exe }} config virtualenvs.in-project"
+      register: poetry_config
+      changed_when: false
+
+    - name: configure poetry to use in-project venvs
+      command: "{{ poetry_exe }} config virtualenvs.in-project true"
+      when: poetry_config.stdout == 'false'
+    
+    - name: ohmyzsh config file
+      become: true
+      template:
+        src: poetry.zsh.j2
+        dest: "{{ poetry_ohmyzsh_config }}"
+  tags:
+    - poetry

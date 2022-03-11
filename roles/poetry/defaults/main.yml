@@ -1,0 +1,16 @@
+poetry_dependencies:
+  - python3-venv
+poetry_bin: "{{ ansible_user_dir }}/.local/bin"
+poetry_exe: "{{ poetry_bin }}/poetry"
+poetry_ohmyzsh_config: "{{ zsh_ohmyzsh_custom_dir }}/poetry.zsh"
+
+anyenv_repo: https://github.com/anyenv/anyenv
+anyenv_install_repo: https://github.com/anyenv/anyenv-install
+anyenv_config_root: "{{ ansible_user_dir }}/.config/anyenv"
+anyenv_install_manifest_dir: "{{ anyenv_config_root }}/anyenv-install"
+anyenv_bin: "{{ anyenv_root }}/bin"
+anyenv_envs_dir: "{{ anyenv_root }}/envs"
+anyenv_envs:
+  - nodenv
+  - pyenv
+  - rbenv

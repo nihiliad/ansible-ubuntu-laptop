@@ -9,3 +9,5 @@
     - direnv
     - zoom
     - anyenv
+    - poetry
+#    - { role: slack, slack_version: '4.23.0' }

@@ -1,0 +1,5 @@
+# Note: This syntax may work only in zsh:
+if ! type poetry >/dev/null 2>&1; then
+  typeset -U path
+  path=({{ poetry_bin }} $path)
+fi
