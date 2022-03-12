@@ -2,6 +2,7 @@
 standalone_packages:
   - ack-grep
   - gnome-tweaks
+  - jq
 #  - network-manager-vpnc-gnome # TODO: Automate configuration?
   - tree
   - xz-utils 
