@@ -13,3 +13,7 @@
     - { role: instantclient,
         instantclient_rpm_url: https://download.oracle.com/otn_software/linux/instantclient/215000/oracle-instantclient-basic-21.5.0.0.0-1.el8.x86_64.rpm
       }
+    - { role: sqldeveloper,
+        # NOTE: The RPM must be downloaded manually to /opt/oracle before running this role.
+        sqldeveloper_rpm_url: https://www.oracle.com/tools/downloads/sqldev-downloads.html
+      }

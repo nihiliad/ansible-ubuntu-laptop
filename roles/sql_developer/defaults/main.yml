@@ -1,5 +1,0 @@
----
-sql_developer_user: root
-sql_developer_group: root
-sql_developer_file_mode: "{{ env_file_mode }}"
-sql_developer_dir_mode: "{{ env_dir_mode }}"

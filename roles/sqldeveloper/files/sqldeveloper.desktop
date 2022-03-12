@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Oracle SQL Developer
+Comment=SQL Developer fro Oracle
+GenericName=SQL Tool
+Exec=/usr/local/bin/sqldeveloper
+Icon=/opt/sqldeveloper/icon.png
+Terminal=false
+Type=Application
+StartupNotify=true
+Categories=Utility;Oracle;Development;SQL;

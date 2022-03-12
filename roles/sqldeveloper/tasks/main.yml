@@ -1,0 +1,34 @@
+---
+- name: sqldeveloper
+  block:
+    - name: install dependencies
+      apt:
+        name: "{{ sqldeveloper_dependencies }}"
+
+    - name: ensure root dir exists
+      file:
+        path: "{{ sqldeveloper_root }}"
+        state: directory
+
+# For now, at least, we must download the URL manually.
+#    - name: download rpm
+#      get_url:
+#        url: "{{ sqldeveloper_rpm_url }}"
+#        dest: "{{ sqldeveloper_root }}"
+    
+    - name: install
+      ansible.builtin.shell: alien -i sqldeveloper*.rpm
+      args:
+        executable: /bin/zsh
+        chdir: "{{ sqldeveloper_root }}"
+
+    - name: desktop application file
+      copy:
+        src: sqldeveloper.desktop
+        dest: /usr/share/applications/sqldeveloper.desktop
+    
+    - name: update desktop database
+      command: update-desktop-database
+  become: true
+  tags:
+    - sqldeveloper

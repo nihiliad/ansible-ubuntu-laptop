@@ -1,0 +1,5 @@
+sqldeveloper_dependencies:
+  - alien
+  - openjdk-11-jdk
+sqldeveloper_rpm_url: https://www.oracle.com/tools/downloads/sqldev-downloads.html
+sqldeveloper_root: /opt/oracle/
