@@ -16,3 +16,4 @@ galaxy_info:
     versions:
     - all
 dependencies:
+  - role: zsh
