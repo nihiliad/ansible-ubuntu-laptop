@@ -1,0 +1,19 @@
+---
+- name: kitty
+  block:
+    - name: install
+      become: true
+      apt:
+        name: kitty
+
+    - name: config root
+      file:
+        state: directory
+        path: "{{ kitty_config_root }}"
+    
+    - name: config file
+      copy:
+        src: kitty.conf
+        dest: "{{ kitty_config_root }}"
+  tags:
+    - kitty

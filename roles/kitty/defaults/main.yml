@@ -1,0 +1,2 @@
+---
+kitty_config_root: "{{ ansible_user_dir }}/.config/kitty"

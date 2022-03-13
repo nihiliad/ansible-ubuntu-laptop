@@ -17,3 +17,4 @@
         # NOTE: The RPM must be downloaded manually to /opt/oracle before running this role.
         sqldeveloper_rpm_url: https://www.oracle.com/tools/downloads/sqldev-downloads.html
       }
+    - kitty
