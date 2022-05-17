@@ -3,11 +3,11 @@
   block:
     - name: apt key
       apt_key:
-        url: https://dl.google.com/linux/linux_signing_key.pub
+        url: "{{ chrome_base_url }}/linux_signing_key.pub"
     
     - name: apt repository
       apt_repository:
-        repo: deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main
+        repo: deb [arch=amd64] {{ chrome_base_url }}/chrome/deb/ stable main
         filename: google-chrome
     
     - name: install
