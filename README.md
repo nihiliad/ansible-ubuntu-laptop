@@ -4,14 +4,14 @@ Use Ansible to install and configure software on a laptop running Ubuntu.
 
 ## Quick Start
 
-### Install Ansible
+### Install Ansible and Other Prerequisites
 
 Instructions from the official Ansible docs for
 [installing on Ubuntu](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#installing-ansible-on-ubuntu):
 
 ```
 sudo apt update
-sudo apt install software-properties-common
+sudo apt install direnv software-properties-common
 sudo apt-add-repository --yes --update ppa:ansible/ansible
 sudo apt install ansible
 ```
@@ -53,7 +53,7 @@ running the installer for the [Guest OS](#guest-os).
 Follow the prompts in the installer.
 
 **Waring!** Do _not_ encrypt the drive for the host OS! This has made several virtual
-machines, including Pop!_OS 20.04 and 21.10, impossible to shut down and restart with Boxes.
+machines, including Pop!\_OS 20.04 and 21.10, impossible to shut down and restart with Boxes.
 
 #### Share this repo folder in the guest OS
 
@@ -74,7 +74,7 @@ should be a "Spice client folder":
 
 ![Files (Nautilus) after installing SPICE tools](files-after-spice.png) 
 
-In the Boxes menu, go to the "Properties" for this virtual machine, and select the
+In the Boxes three dots menu, go to the "Preferences" for this virtual machine, and select the
 "Devices & Shares" tab. Under "Folder Shares", click "+" to add a new share. In the form
 that pops up, navigate to this "Local Folder" on the host OS, click "Open", give the
 folder a "Name" on the guest OS, then click "Save". 
@@ -95,7 +95,8 @@ should be something like:
 
 #### Install credentials for GitHub
 
-Copy credentials, probably public-private keys, for GitHub, from the host OS to the guest OS.
+Copy credentials, probably public-private keys, for GitHub, from the host OS to the guest OS. Also copy
+the `.envrc` file for github.com.
 
 #### Remove the shared folder
 
