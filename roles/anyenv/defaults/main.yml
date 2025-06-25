@@ -14,6 +14,22 @@ anyenv_dependencies:
   - libssl-dev 
   - openssl
   - zlib1g-dev
+
+  # pyenv dependencies missing above:
+  - curl
+  - libbz2-dev
+  - liblzma-dev
+  - libncursesw5-dev
+  - libreadline-dev
+  - libsqlite3-dev
+  - libxml2-dev
+  - libxmlsec1-dev
+  - llvm
+  - make
+  - tk-dev
+  - wget
+  - xz-utils
+
 anyenv_envs:
   - nodenv
   - pyenv
