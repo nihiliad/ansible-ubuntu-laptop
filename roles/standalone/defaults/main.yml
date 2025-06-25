@@ -1,6 +1,10 @@
 ---
 standalone_packages:
   - ack-grep
+  - gnome-shell-extension-gsconnect # Do I really want this?
+  - gnome-shell-extension-hide-activities
+  - gnome-shell-extension-system-monitor
+  - gnome-shell-extensions-gpaste # automatically installs gpaste, too
   - gnome-tweaks
   - jq
 #  - network-manager-vpnc-gnome # TODO: Automate configuration?
